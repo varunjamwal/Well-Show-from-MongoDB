@@ -186,9 +186,16 @@ body{text-align:center}
 			</div>
 </div> 
 
-         <div class="row" >
-             <div class="col-sm-4"></div>
-             <div class="col-sm-4">         <%
+        <div class="col-sm-4">
+		<div class="btn-group">
+			<button type="button" class="btn btn-primary" onClick="setTimeout(myFunc,0);">start process</button>
+		</div>
+	</div>
+	
+	<div class="col-sm-4">
+		<p id="demo"></p>
+	</div>       
+	<%
              try {
             MongoClient mongoClient = new MongoClient();
              MongoDatabase database = mongoClient.getDatabase("rig_witsml");
