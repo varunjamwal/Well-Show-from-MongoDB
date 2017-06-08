@@ -129,10 +129,7 @@ body{text-align:center}
 			<div class="col-sm-1">
 				<div class="btn-group">
 					<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">Well Size</button>
-					 
-						<span class="caret"></span>
-					
-					
+					<span class="caret"></span>
 					<ul class="dropdown-menu" role="menu">
 						<li class="dropdown-header">Select the well size</li>
 						<li class="divider"></li>
@@ -143,7 +140,6 @@ body{text-align:center}
 					</ul>
 				</div>
 			</div>
-			
 			<div class="col-sm-1">
 				<div class="btn-group">
 					<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">Select</button>
@@ -170,9 +166,10 @@ body{text-align:center}
 		<p id="demo"></p>
 	</div>
 </div> 
-         
+
          <div class="row" >
-         <%
+             <div class="col-sm-4"></div>
+             <div class="col-sm-4">         <%
              try {
             MongoClient mongoClient = new MongoClient();
              MongoDatabase database = mongoClient.getDatabase("rig_witsml");
@@ -202,8 +199,10 @@ body{text-align:center}
                 <td><% out.println(state);%></td>
                 <td><% out.println(Operator);%></tr> 
           <% }%>
-        </table><%
-        
+        </table>
+        </div>
+        <div class="col-sm-4"></div>
+             <%
 } catch (Exception e1) {
     // TODO Auto-generated catch block
     e1.printStackTrace();
