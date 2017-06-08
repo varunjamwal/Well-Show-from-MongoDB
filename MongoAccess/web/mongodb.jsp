@@ -173,18 +173,12 @@ body{text-align:center}
 			
 			<div class="col-sm-1">
 				<div class="btn-group">
-                                    <button type="button" class="btn btn-primary"><A HREF="javascript:history.go(0)"><font color ="white">Click to refresh</font></A></button>
-					
+					<button type="button" class="btn btn-primary" onClick="refreshPage()"><span class="glyphicon glyphicon-refresh" style="height:20px"> Refresh</span></button>
 				</div>
 			</div>
 	</div>
 	
-	<div class="col-sm-1">
-				<div class="btn-group">
-					<button type="button" class="btn btn-primary" onClick="refreshPage()"><span class="glyphicon glyphicon-refresh" style="height:20px"> Refresh</span></button>
-				</div>
-			</div>
-</div> 
+	</div> 
 
         <div class="col-sm-4">
 		<div class="btn-group">
