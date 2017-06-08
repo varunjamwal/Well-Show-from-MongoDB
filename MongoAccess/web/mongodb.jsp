@@ -68,6 +68,7 @@ body{text-align:center}
   left: 100%;
   z-index: 3;
 }
+
 .btn-breadcrumb .btn:not(:last-child):before {
   content: " ";
   display: block;
@@ -115,7 +116,7 @@ body{text-align:center}
         </div>
 	</div>
 	
-	<div class="row">
+	<div class="row" name = "a">
 		<div class="col-sm-1"></div>
 		<div class="col-sm-1"></div>
 		<div class="col-sm-1"></div>
@@ -170,7 +171,7 @@ body{text-align:center}
 	</div>
 </div> 
          
-         <div class="row">
+         <div class="row" >
          <%
              try {
             MongoClient mongoClient = new MongoClient();
@@ -178,7 +179,8 @@ body{text-align:center}
             FindIterable<Document> mydatabaserecords = database.getCollection("well").find();
         MongoCursor<Document> iterator = mydatabaserecords.iterator();
         %>
-                <table border="2">
+                 <table class="table table-striped">
+
             <tr>
                 <th>Well Name</th>
                 <th>Country</th>
