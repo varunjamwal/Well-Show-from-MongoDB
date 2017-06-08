@@ -178,6 +178,14 @@ body{text-align:center}
             FindIterable<Document> mydatabaserecords = database.getCollection("well").find();
         MongoCursor<Document> iterator = mydatabaserecords.iterator();
         %>
+                <table border="2">
+            <tr>
+                <th>Well Name</th>
+                <th>Country</th>
+                <th>State</th>
+                <th>Operator</th>
+            </tr>
+
         <%
         while (iterator.hasNext()) {
             Document doc = iterator.next();
@@ -185,13 +193,6 @@ body{text-align:center}
             String state = doc.getString("state");
             String Operator = doc.getString("operator");
             String name = doc.getString("nameWell");%>
-        <table border="2">
-            <tr>
-                <th>Well Name</th>
-                <th>Country</th>
-                <th>State</th>
-                <th>Operator</th>
-            </tr>
 
             <tr>
                 <td><% out.println(name);%></td>
