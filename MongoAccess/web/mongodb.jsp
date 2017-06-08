@@ -60,6 +60,10 @@
 	{
 		document.getElementById("01").style.color="red"
 	}
+        function myFunc3()
+	{
+        window.location = "Index.jsp";
+        }
   </script>
 
 <style>
@@ -123,8 +127,8 @@ body{text-align:center}
     	<h2></h2>
         <div class="btn-group btn-breadcrumb">
             
-            <a href="#" class="btn btn-default" id="click">File Available</a>
-            <a href="#" class="btn btn-default" id="01">MA</a>
+            <a href="#" class="btn btn-default" id="click" style="color:red">File Available</a>
+            <a href="#" class="btn btn-default" id="01" style="color:red">MA</a>
             <a href="#" class="btn btn-default">UN</a> 
             <a href="#" class="btn btn-default">Data Aggregation</a>
            
@@ -166,7 +170,7 @@ body{text-align:center}
 					
 					<ul class="dropdown-menu" role="menu">
 						<li><a href="#" onClick="myFunc2()">Promote</a></li>
-						<li><a href="#">Demote</a></li>
+						<li><a href="#" onClick="myFunc3()">Demote</a></li>
 					</ul>
 				</div>
 			</div>
@@ -180,11 +184,7 @@ body{text-align:center}
 	
 	</div> 
 
-        <div class="col-sm-4">
-		<div class="btn-group">
-			<button type="button" class="btn btn-primary" onClick="setTimeout(myFunc,0);">start process</button>
-		</div>
-	</div>
+
 	
 	<div class="col-sm-4">
 		<p id="demo"></p>
