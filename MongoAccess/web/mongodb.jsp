@@ -131,14 +131,9 @@ body{text-align:center}
         </div>
 	</div>
 	
-		 <div class="col-sm-1">
-				<div class="btn-group">
-					<button type="buton" class="btn btn-primary" onClick="myFunc()">start process</button>
-					
-				</div>
-			</div>
 		 
-	<div class="row" name = "a">
+		 
+	<div class="row">
 		<div class="col-sm-1"></div>
 		<div class="col-sm-1"></div>
 		<div class="col-sm-1"></div>
@@ -184,8 +179,10 @@ body{text-align:center}
 			</div>
 	</div>
 	
-	<div class="row">
-		<p id="demo"></p>
+	<div class="col-sm-1">
+				<div class="btn-group">
+					<button type="buton" class="btn btn-primary" onClick="myFunc()">start process</button>
+				</div>
 	</div>
 </div> 
 
