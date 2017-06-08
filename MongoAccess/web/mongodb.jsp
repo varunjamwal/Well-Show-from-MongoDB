@@ -45,6 +45,21 @@
 	{
 		document.getElementById("demo").innerHTML="10 Well size selected ";
 	}
+	  
+	  function refreshPage()
+	{
+		window.location.reload();
+	} 
+	
+	function myFunc()
+	{
+		document.getElementById("click").style.color="red"
+	}
+	
+	function myFunc2()
+	{
+		document.getElementById("01").style.color="red"
+	}
   </script>
 
 <style>
@@ -108,14 +123,21 @@ body{text-align:center}
     	<h2></h2>
         <div class="btn-group btn-breadcrumb">
             
-            <a href="#" class="btn btn-default">File Available</a>
-            <a href="#" class="btn btn-default">MA</a>
+            <a href="#" class="btn btn-default" id="click">File Available</a>
+            <a href="#" class="btn btn-default" id="01">MA</a>
             <a href="#" class="btn btn-default">UN</a> 
             <a href="#" class="btn btn-default">Data Aggregation</a>
            
         </div>
 	</div>
 	
+		 <div class="col-sm-1">
+				<div class="btn-group">
+					<button type="buton" class="btn btn-primary" onClick="myFunc()">start process</button>
+					
+				</div>
+			</div>
+		 
 	<div class="row" name = "a">
 		<div class="col-sm-1"></div>
 		<div class="col-sm-1"></div>
@@ -148,7 +170,7 @@ body{text-align:center}
 					
 					
 					<ul class="dropdown-menu" role="menu">
-						<li><a href="#">Promote</a></li>
+						<li><a href="#" onClick="myFunc2()">Promote</a></li>
 						<li><a href="#">Demote</a></li>
 					</ul>
 				</div>
