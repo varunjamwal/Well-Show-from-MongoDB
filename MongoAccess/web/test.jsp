@@ -210,27 +210,27 @@ body
     <script>
 	function sizeSelect100()
 	{
-		document.getElementById("demo").innerHTML="100 Well size selected";
+		document.getElementById("demo").innerHTML="Well of size 100 selected";
 	}
 	
 	function sizeSelect50()
 	{
-		document.getElementById("demo").innerHTML="50 Well size selected";
+		document.getElementById("demo").innerHTML="Well of size 50 selected";
 	}
 	
 	function sizeSelect20()
 	{
-		document.getElementById("demo").innerHTML="20 Well size selected";
+		document.getElementById("demo").innerHTML="Well of size 20 selected";
 	}
 	
 	function sizeSelect10()
 	{
-		document.getElementById("demo").innerHTML="10 Well size selected ";
+		document.getElementById("demo").innerHTML="Well of size 10 selected";
 	}
 	
-	function myFunc()
+	function backgroundColor(color)
 	{
-		document.getElementById("click").style.color="red";
+		document.getElementById("click").style.background=color;
 	}
 	
 	function myFunc2()
@@ -258,8 +258,8 @@ body
 <body style="overflow:hidden">
 
 <div id="StageGate">    
-    <button id="click" type="button" class="btn btn-info btn-arrow-right">File Available</button>
-    <button type="button" class="btn btn-info btn-arrow-right">Mnemonic analysis</button>
+    <button type="button" class="btn btn-info btn-arrow-right">File Available</button>
+    <button id="click" type="button" class="btn btn-info btn-arrow-right">Mnemonic analysis</button>
     <button type="button" class="btn btn-info btn-arrow-right">Unit Normalisation</button>
     <button type="button" class="btn btn-info btn-arrow-right">HM</button>
     <button type="button" class="btn btn-info btn-arrow-right">Pattern Generation</button>
@@ -268,24 +268,26 @@ body
         <div class="row">
           
             <div class="col-sm-4"></div>
-            <div class="col-sm-4"></div>
+            <div class="col-sm-4">
+                <p id="demo" style="padding-top:25px"></p>
+            </div>
             
             <div class="col-sm-4"> 
                  <div class="btn-sm">
                     
-                     <button type="buton" class="btn-sm btn-primary dropdown-toggle" data-toggle="dropdown">Well Size
+                     <button type="button" class="btn-sm btn-primary dropdown-toggle" data-toggle="dropdown">Well Size
 			<span class="caret"></span>
                     </button>
                      <ul class="dropdown-menu" role="menu">
 			<li class="dropdown-header">Select the well size</li>
 			<li class="divider"></li>
-			<li><a href="#">100</a></li>
-			<li><a href="#">50</a></li>
-			<li><a href="#">20</a></li>
-			<li><a href="#">10</a></li>
+			<li><a href="#" onClick="sizeSelect100()">100</a></li>
+			<li><a href="#" onClick="sizeSelect50()">50</a></li>
+			<li><a href="#" onClick="sizeSelect20()">20</a></li>
+			<li><a href="#" onClick="sizeSelect10()">10</a></li>
                     </ul>
                      
-                    <button type="button" class="btn-sm btn-primary">Promote</button>
+                    <button type="button" class="btn-sm btn-primary" onClick="backgroundColor('#1d79fd');">Promote</button>
                     <button type="button" class="btn-sm btn-primary">Demote</button>
                     <button type="button" class="btn-sm btn-primary glyphicon glyphicon-refresh"></button>   
 					
