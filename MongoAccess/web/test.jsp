@@ -27,6 +27,7 @@
   <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
 
 	<style>
+            *{margin:0px}
 	
 			body{text-align:center}
 			.btn 
@@ -84,8 +85,9 @@
 				background-color: white;
 			}
 	
-			#table{padding-top:80px; font-size:11px; text-align:justify; color:#666}
-			
+			#table{padding-top:30px; font-size:11px; text-align:justify; color:#666;}
+                        #StageGate{padding-bottom:10px}
+                        #row{padding-top:10px}
 			
 	/*navigation*/		
 .nav-side-menu 
@@ -98,7 +100,7 @@
   background-color: #85c1e9;
   position: fixed;
   top: 0px;
-  width: 250px;
+  width: 233px;
   height: 100%;
   color: #e1ffff;
 }
@@ -238,64 +240,109 @@ body
         function myFunc3()
 	{
         window.location = "Index.jsp";
-    }
+        }
+        
+        function toggle(source) 
+        {
+        checkboxes = document.getElementsByName('foo');
+        for(var i=0, n=checkboxes.length;i<n;i++) 
+            {
+                checkboxes[i].checked = source.checked;
+            }
+        }
   </script>
 	
 	
 </head>
 
-<body>
+<body style="overflow:hidden">
 
+<div id="StageGate">    
     <button id="click" type="button" class="btn btn-info btn-arrow-right">File Available</button>
     <button type="button" class="btn btn-info btn-arrow-right">Mnemonic analysis</button>
     <button type="button" class="btn btn-info btn-arrow-right">Unit Normalisation</button>
     <button type="button" class="btn btn-info btn-arrow-right">HM</button>
     <button type="button" class="btn btn-info btn-arrow-right">Pattern Generation</button>
+</div>	
 	
-	<div class="row" id="table">
-    	<div class="col-sm-3">
+        <div class="row">
+          
+            <div class="col-sm-4"></div>
+            <div class="col-sm-4"></div>
+            
+            <div class="col-sm-4"> 
+                 <div class="btn-sm">
+                    
+                     <button type="buton" class="btn-sm btn-primary dropdown-toggle" data-toggle="dropdown">Well Size
+			<span class="caret"></span>
+                    </button>
+                     <ul class="dropdown-menu" role="menu">
+			<li class="dropdown-header">Select the well size</li>
+			<li class="divider"></li>
+			<li><a href="#">100</a></li>
+			<li><a href="#">50</a></li>
+			<li><a href="#">20</a></li>
+			<li><a href="#">10</a></li>
+                    </ul>
+                     
+                    <button type="button" class="btn-sm btn-primary">Promote</button>
+                    <button type="button" class="btn-sm btn-primary">Demote</button>
+                    <button type="button" class="btn-sm btn-primary glyphicon glyphicon-refresh"></button>   
+					
+                 </div>       
+	</div>
+</div>
+</div>
+    
+        <div class="row" id="table">
+    	<div class="col-sm-2">
         	<div class="nav-side-menu">
-            <h4>NAVIGATION</h4>
+            
             	<div class="menu-list">
                 	<ul id="menu-content" class="menu-content collapse in">
                     	<li  data-toggle="collapse" data-target="#products" class="collapsed active">
-                  			<a href="#"><i class="glyphicon glyphicon-chevron-right"></i> Well Size</a>
+                  			<a href="#"><i class="glyphicon glyphicon-chevron-right"></i> DASHBOARD</a>
                 		</li>
                         	<ul class="sub-menu collapse" id="products">
-                            	<li><a href="#" onClick="sizeSelect100()">100</a></li>
-								<li><a href="#" onClick="sizeSelect50()">50</a></li>
-								<li><a href="#" onClick="sizeSelect20()">20</a></li>
-								<li><a href="#" onClick="sizeSelect10()">10</a></li>
+                                    <li><a href="#"></a></li>
+                                    <li><a href="#"></a></li>
+				    <li><a href="#"></a></li>
+				    <li><a href="#"></a></li>
                             </ul>
                             
-                            <li data-toggle="collapse" data-target="#service" class="collapsed">
-                  				<a href="#"><i class="glyphicon glyphicon-chevron-right"></i>Button</a>
-                			</li>  
+                            <!--<li data-toggle="collapse" data-target="#service" class="collapsed">
+                  		<a href="#"><i class="glyphicon glyphicon-chevron-right"></i>Button</a>
+                            </li>  
 							
-							<ul class="sub-menu collapse" id="service">
-							  <li><a href="#" onClick="myFunc2()">Promote</a></li>
-							  <li><a href="#" onClick="myFunc3()">Demote</a></li>
-							</ul>
+			<ul class="sub-menu collapse" id="service">
+			  <li><a href="#"></a></li>
+			  <li><a href="#"></a></li>
+			</ul>
+                            -->
                     </ul>
                 </div>
             </div>
         </div>
+        
         <%
-             try {
-            MongoClient mongoClient = new MongoClient();
-             MongoDatabase database = mongoClient.getDatabase("rig_witsml");
-            FindIterable<Document> mydatabaserecords = database.getCollection("well").find();
-        MongoCursor<Document> iterator = mydatabaserecords.iterator();
+             try 
+             {
+                MongoClient mongoClient = new MongoClient();
+                MongoDatabase database = mongoClient.getDatabase("rig_witsml");
+                FindIterable<Document> mydatabaserecords = database.getCollection("well").find();
+                MongoCursor<Document> iterator = mydatabaserecords.iterator();
         %>
-        <div class="col-sm-8">
+        
+        <div class="col-sm-10">
         	<table class="table table-hover">
-            	  <tr>
+            <tr>
+                <th><input type="checkbox" onClick="toggle(this)"></input></th>
                 <th>Well Name</th>
                 <th>Country</th>
                 <th>State</th>
                 <th>Operator</th>
             </tr>
-
+            
         <%
         while (iterator.hasNext()) {
             Document doc = iterator.next();
@@ -304,6 +351,7 @@ body
             String Operator = doc.getString("operator");
             String name = doc.getString("nameWell");%>
             <tr class = "info">
+                <td><input type="checkbox" name="foo" value="bar1"></input></td>
                 <td><% out.println(name);%></td>
                 <td><% out.println(country);%></td>
                 <td><% out.println(state);%></td>
@@ -311,7 +359,6 @@ body
           <% }%>
             </table>
         </div>
-        <div class="col-sm-1"></div>
     </div>
 	
              <%
@@ -320,21 +367,7 @@ body
     e1.printStackTrace();
 }
 %>
-	<div class="row">		
-		<div class="col-sm-2">
-			<div class="btn-group">
-				<button type="button" class="btn btn-primary glyphicon glyphicon-refresh"></button>
-			</div>
-		</div>
-		
-		<div class="col-sm-3"></div>
 	
-		<div class="col-sm-3">
-			<p id="demo"></p>
-		</div> 
-		
-		<div class="col-sm-3"></div>
-		</div>
-	</div>
+
 </body>
 </html>
