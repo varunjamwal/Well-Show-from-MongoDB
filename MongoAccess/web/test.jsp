@@ -243,7 +243,7 @@ body
         
         function toggle(source) 
         {
-        checkboxes = document.getElementsByName('foo');
+        checkboxes = document.getElementsByName('values');
         for(var i=0, n=checkboxes.length;i<n;i++) 
             {
                 checkboxes[i].checked = source.checked;
@@ -252,7 +252,7 @@ body
         
        function gotoMA()
        {
-           window.location = 'ma.jsp';
+           window.location = 'test.jsp';
        }
   </script>
 	
@@ -290,17 +290,16 @@ body
 			<li><a href="#" onClick="sizeSelect20()">20</a></li>
 			<li><a href="#" onClick="sizeSelect10()">10</a></li>
                     </ul>
-                    
-                <form method="post" action="ma.jsp">     
-                    <button type="button" class="btn-sm btn-primary" onclick="gotoMA()">Promote</button>
-                    <button type="button" class="btn-sm btn-primary">Demote</button>
+               <form method="post" action="stage3.jsp">     
+                    <INPUT TYPE=submit name=submit Value="Promote">	
+                    <button type="button" class="btn-sm btn-primary" onClick="">Demote</button>
                     <button type="button" class="btn-sm btn-primary glyphicon glyphicon-refresh" onClick="window.location.reload();"></button>   
 					
                  </div>       
 	</div>
 </div>
 </div>
-    
+      
         <div class="row" id="table">
     	<div class="col-sm-2">
         	<div class="nav-side-menu">
@@ -331,7 +330,6 @@ body
             </div>
         </div>
         
-            <!-- Jsp MongoDB code -->
         <%
              try 
              {
@@ -346,56 +344,52 @@ body
             <tr>
                 <th><input type="checkbox" onClick="toggle(this)"></input></th>
                 <th>Well Name</th>
-                <th>Field</th>
                 <th>Country</th>
                 <th>State</th>
                 <th>Operator</th>
-                <th>Region</th>
-                <th>TimeZone</th>
             </tr>
             
         <%
         while (iterator.hasNext()) {
             Document doc = iterator.next();
             String country = doc.getString("country");
+           
             String state = doc.getString("state");
             String Operator = doc.getString("operator");
-            
             String name = doc.getString("nameWell");%>
+           
             <input type="hidden" name="OPS" value=<%=Operator%>
-        
+   
             <tr class = "info">
-                <td>
-                    <input type="checkbox" name="foo" value="bar1"></input>
-                    <input type="hidden" name="state" value=<%=state%>
-                </td>
                 
                 <td>
-                    <% out.println(name);%>
-                    <input type="hidden" name="coun" value=<%=country%> 
+                   
+               <input type="checkbox" name="values" value=<%=name%> />
+               <input type="hidden" name="state" value=<%=state%>
+                       
                 </td>
+                <td><% out.println(name);%>
+                <input type="hidden" name="coun" value=<%=country%> </td>
                 <td><% out.println(country);%></td>
                 <td><% out.println(state);%></td>
-                <td><% out.println(Operator);%></td>
-            </tr>
+                            
+                                   <td><% out.println(Operator);%></td></tr> 
           <% }
-          
+         
           %>
             </table>
         </div>
     </div>
-	
-    <INPUT TYPE=submit name=submit Value="Promote">	
-    <%
+
+             <%
                  
-    } 
-catch (Exception e1) 
-{
+
+} catch (Exception e1) {
     // TODO Auto-generated catch block
     e1.printStackTrace();
 }
 %>
-    </form>
+</form>	
 
 </body>
 </html>
