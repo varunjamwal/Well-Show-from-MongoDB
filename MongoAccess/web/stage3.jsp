@@ -1,3 +1,4 @@
+<%@page import="com.mongodb.BasicDBObject"%>
 <%@page import="com.mongodb.client.FindIterable"%>
 <%@page import="com.mongodb.MongoClient"%>
 <%@page import="com.mongodb.MongoClientURI"%>
@@ -260,7 +261,10 @@ body
         
         function gotoIndex()
         {
-            window.location = 'index.jsp';
+           
+        }
+        function back(){
+            window.location = 'test.jsp';
         }
   </script>
 	
@@ -270,7 +274,7 @@ body
 <body style="overflow:hidden">
 
 <div id="StageGate">    
-    <button type="button" class="btn btn-info btn-arrow-right">File Available</button>
+    <button type="button" class="btn btn-info btn-arrow-right" onclick="back()">File Available</button>
     <button id="click" type="button" class="btn btn-info btn-arrow-right" style="background-color:#1d79fd">Mnemonic analysis</button>
     <button type="button" class="btn btn-info btn-arrow-right">Unit Normalisation</button>
     <button type="button" class="btn btn-info btn-arrow-right">HM</button>
@@ -340,22 +344,25 @@ body
         
             <!-- Jsp MongoDB code -->
         <%
-        try{
+
       
             String[] selectedNames = request.getParameterValues("values");
-            String[] selectedOperator = request.getParameterValues("OPS");
-            String[]  selectedCountry = request.getParameterValues("coun"); 
-            String[] selectedState = request.getParameterValues("state");
-            String[] selectedRegion = request.getParameterValues("reg");
-            String[] selectedStatus = request.getParameterValues("status");
-            String[] selectedPurpose = request.getParameterValues("purpose");
+
+                MongoClient client = new MongoClient("localhost", 27017);
+		MongoDatabase database = client.getDatabase("rig_witsml");
+		MongoCollection collection = database.getCollection("well");
+                Document document = new Document();
+                BasicDBObject newDocument = new BasicDBObject();
+                newDocument.append("$set", new BasicDBObject().append("flag", 2));
+                FindIterable<Document> mydatabaserecords = database.getCollection("well").find();
+                MongoCursor<Document> iterator = mydatabaserecords.iterator();
+                for(int i=0;i<selectedNames.length;i++){
+                        BasicDBObject searchQuery = new BasicDBObject().append("nameWell", selectedNames[i]);
+                        collection.updateMany(searchQuery, newDocument);
+                }
         %>
         
         <div class="col-sm-10">
-            <% if(selectedNames == null){
-                %>
-                <h1 class="nodata"><%out.print("No Data Entered");}
-else{%></h1>
             <table class="table table-hover">
             <tr>
                 <th><input type="checkbox" onClick="toggle(this)"></input></th>
@@ -368,38 +375,40 @@ else{%></h1>
                 <th>Purpose</th>
             </tr>
             
-        
-            
-          <% for(int i = 0; i    < selectedNames.length; i++){
-              
-          %>
-          
-          <tr class="info"> 
-                <td><input type="checkbox" /></td>
-                <td><% out.println(selectedNames[i]); %></td>
-                <td><% out.println(selectedCountry[i]); %></td>
-                <td><% out.println(selectedState[i]);%></td>
-                <td><% out.println(selectedOperator[i]);%></td>
-                <td><% out.println(selectedRegion[i]);%></td>
-                <td><% out.println(selectedStatus[i]);%></td>
-                <td><% out.println(selectedPurpose[i]);%></td>
-            </tr>
+        <%
+        while (iterator.hasNext()) {
+            Document doc = iterator.next();
+            String country = doc.getString("country");
+            String state = doc.getString("state");
+            String Operator = doc.getString("operator");
+            String name = doc.getString("nameWell");
+            String region = doc.getString("region");
+            String statusWell = doc.getString("statusWell");
+            String purposeWell = doc.getString("purposeWell");
+            Integer flag = doc.getInteger("flag").intValue();
+            if (flag ==2){
+        %>
+            <tr class = "info">
+                <td>  
+               <input type="checkbox" name="values" value=<%=name%> />
+                 </td>
+               <td><% out.println(name);%></td>
+                <td><% out.println(country);%></td>
+                <td><% out.println(state);%></td>
+                <td><% out.println(Operator);%></td>
+                <td><% out.println(region);%></td>
+                <td><% out.println(statusWell);%></td>
+                <td><% out.println(purposeWell);%></td>
+            </tr> 
         </div>
-    </div>
-	
-    <%    
-    }
-}
-    %>
-    </table>
+        </div>
+   
     <%
 }
-    catch(Exception e){
-        
-    }
+}
+
 %>
 	
-
+ </table>
 </body>
 </html>
- 
