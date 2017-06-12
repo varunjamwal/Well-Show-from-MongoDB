@@ -270,7 +270,7 @@ body
     <button type="button" class="btn btn-info btn-arrow-right">HM</button>
     <button type="button" class="btn btn-info btn-arrow-right">Pattern Generation</button>
 </div>	
-	<form method="post" action="ma.jsp">
+	<form method="post" action="stage3.jsp">
         <div class="row">
           
             <div class="col-sm-4"></div>
@@ -364,47 +364,33 @@ body
             String region = doc.getString("region");
             String statusWell = doc.getString("statusWell");
             String purposeWell = doc.getString("purposeWell");
-            
-            
+            Integer flag = doc.getInteger("flag");
+            if(flag ==0){
         %>
-           
-            <input type="hidden" name="OPS" value=<%=Operator%> />
-   
             <tr class = "info">
                 
-                <td>
-                   
+                <td>  
                <input type="checkbox" name="values" value=<%=name%> />
-               
-               
-               
-               <input type="hidden" name="purpose" value=<%=purposeWell%> />
-               
-               </td>
-                
+                 </td>
                <td><% out.println(name);%></td>
-                <input type="hidden" name="coun" value=<%=country%> /> 
                 <td><% out.println(country);%></td>
-                <input type="hidden" name="state" value=<%=state%> />
                 <td><% out.println(state);%></td>
                 <td><% out.println(Operator);%></td>
-                    <input type="hidden" name="reg" value=<%=region%> />
                 <td><% out.println(region);%></td>
-                        <input type="hidden" name="status" value=<%=statusWell%> />
                 <td><% out.println(statusWell);%></td>
                 <td><% out.println(purposeWell);%></td>
-            </tr> 
-          <% }
+            </tr> <%
+}
+    }
+%>
          
-          %>
+    
             </table>
         </div>
     </div>
-
-             <%
-                 
-
-} catch (Exception e1) {
+            <%
+}
+catch (Exception e1) {
     // TODO Auto-generated catch block
     e1.printStackTrace();
 }
