@@ -88,7 +88,7 @@
 			#table{padding-top:30px; font-size:11px; text-align:justify; color:#666;}
                         #StageGate{padding-bottom:10px}
                         #row{padding-top:10px}
-			
+			#click{background-color:#2980b9}
 	/*navigation*/		
 .nav-side-menu 
 {
@@ -210,27 +210,27 @@ body
     <script>
 	function sizeSelect100()
 	{
-		document.getElementById("demo").innerHTML="Well of size 100 selected";
+		document.getElementById("demo").innerHTML="100 Well size selected";
 	}
 	
 	function sizeSelect50()
 	{
-		document.getElementById("demo").innerHTML="Well of size 50 selected";
+		document.getElementById("demo").innerHTML="50 Well size selected";
 	}
 	
 	function sizeSelect20()
 	{
-		document.getElementById("demo").innerHTML="Well of size 20 selected";
+		document.getElementById("demo").innerHTML="20 Well size selected";
 	}
 	
 	function sizeSelect10()
 	{
-		document.getElementById("demo").innerHTML="Well of size 10 selected";
+		document.getElementById("demo").innerHTML="10 Well size selected ";
 	}
 	
-	function backgroundColor(color)
+	function myFunc()
 	{
-		document.getElementById("click").style.background=color;
+		document.getElementById("click").style.color="red";
 	}
 	
 	function myFunc2()
@@ -241,7 +241,10 @@ body
 	{
         window.location = "Index.jsp";
         }
-        
+        function myFunc4()
+        {
+            window.location = "stage3.jsp";
+        }
         function toggle(source) 
         {
         checkboxes = document.getElementsByName('foo');
@@ -258,8 +261,8 @@ body
 <body style="overflow:hidden">
 
 <div id="StageGate">    
-    <button type="button" class="btn btn-info btn-arrow-right">File Available</button>
-    <button id="click" type="button" class="btn btn-info btn-arrow-right">Mnemonic analysis</button>
+    <button id="click" type="button" class="btn btn-info btn-arrow-right">File Available</button>
+    <button type="button" id="click" class="btn btn-info btn-arrow-right">Mnemonic analysis</button>
     <button type="button" class="btn btn-info btn-arrow-right">Unit Normalisation</button>
     <button type="button" class="btn btn-info btn-arrow-right">HM</button>
     <button type="button" class="btn btn-info btn-arrow-right">Pattern Generation</button>
@@ -268,28 +271,26 @@ body
         <div class="row">
           
             <div class="col-sm-4"></div>
-            <div class="col-sm-4">
-                <p id="demo" style="padding-top:25px"></p>
-            </div>
+            <div class="col-sm-4"></div>
             
             <div class="col-sm-4"> 
                  <div class="btn-sm">
                     
-                     <button type="button" class="btn-sm btn-primary dropdown-toggle" data-toggle="dropdown">Well Size
+                     <button type="buton" class="btn-sm btn-primary dropdown-toggle" data-toggle="dropdown">Well Size
 			<span class="caret"></span>
                     </button>
                      <ul class="dropdown-menu" role="menu">
 			<li class="dropdown-header">Select the well size</li>
 			<li class="divider"></li>
-			<li><a href="#" onClick="sizeSelect100()">100</a></li>
-			<li><a href="#" onClick="sizeSelect50()">50</a></li>
-			<li><a href="#" onClick="sizeSelect20()">20</a></li>
-			<li><a href="#" onClick="sizeSelect10()">10</a></li>
+			<li><a href="#">100</a></li>
+			<li><a href="#">50</a></li>
+			<li><a href="#">20</a></li>
+			<li><a href="#">10</a></li>
                     </ul>
-                     
-                    <button type="button" class="btn-sm btn-primary" onClick="backgroundColor('#1d79fd');">Promote</button>
+                <form method="post" action="stage3.jsp">      
+                    <button type="button" class="btn-sm btn-primary" onClick="myFunc4()">Promote</button>
                     <button type="button" class="btn-sm btn-primary">Demote</button>
-                    <button type="button" class="btn-sm btn-primary glyphicon glyphicon-refresh"></button>   
+                    <button type="button" class="btn-sm btn-primary glyphicon glyphicon-refresh" onClick="window.location.reload();"></button>   
 					
                  </div>       
 	</div>
@@ -349,27 +350,43 @@ body
         while (iterator.hasNext()) {
             Document doc = iterator.next();
             String country = doc.getString("country");
+           
             String state = doc.getString("state");
             String Operator = doc.getString("operator");
             String name = doc.getString("nameWell");%>
+           
+            <input type="hidden" name="OPS" value=<%=Operator%>
+   
             <tr class = "info">
-                <td><input type="checkbox" name="foo" value="bar1"></input></td>
-                <td><% out.println(name);%></td>
+                
+                <td>
+                   
+               <input type="checkbox" name="values" value=<%=name%> />
+               <input type="hidden" name="state" value=<%=state%>
+                       
+                </td>
+                <td><% out.println(name);%>
+                <input type="hidden" name="coun" value=<%=country%> </td>
                 <td><% out.println(country);%></td>
                 <td><% out.println(state);%></td>
-                <td><% out.println(Operator);%></tr> 
-          <% }%>
+                            
+                                   <td><% out.println(Operator);%></td></tr> 
+          <% }
+         
+          %>
             </table>
         </div>
     </div>
-	
+<INPUT TYPE=submit name=submit Value="Promote">	
              <%
+                 
+
 } catch (Exception e1) {
     // TODO Auto-generated catch block
     e1.printStackTrace();
 }
 %>
-	
+</form>	
 
 </body>
 </html>
