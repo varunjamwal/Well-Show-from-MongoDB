@@ -86,9 +86,8 @@
 			}
 	
 			#table{padding-top:30px; font-size:11px; text-align:justify; color:#666;}
-                        #StageGate{padding-bottom:10px}
-                        #row{padding-top:10px}
-			#click{background-color:#2980b9}
+                        #StageGate{padding-bottom:18px}
+			
 	/*navigation*/		
 .nav-side-menu 
 {
@@ -210,27 +209,27 @@ body
     <script>
 	function sizeSelect100()
 	{
-		document.getElementById("demo").innerHTML="100 Well size selected";
+		document.getElementById("demo").innerHTML="Well of size 100 selected";
 	}
 	
 	function sizeSelect50()
 	{
-		document.getElementById("demo").innerHTML="50 Well size selected";
+		document.getElementById("demo").innerHTML="Well of size 50 selected";
 	}
 	
 	function sizeSelect20()
 	{
-		document.getElementById("demo").innerHTML="20 Well size selected";
+		document.getElementById("demo").innerHTML="Well of size 20 selected";
 	}
 	
 	function sizeSelect10()
 	{
-		document.getElementById("demo").innerHTML="10 Well size selected ";
+		document.getElementById("demo").innerHTML="Well of size 10 selected";
 	}
 	
-	function myFunc()
+	function backgroundColor(color)
 	{
-		document.getElementById("click").style.color="red";
+		document.getElementById("click").style.background=color;
 	}
 	
 	function myFunc2()
@@ -239,12 +238,9 @@ body
 	}
         function myFunc3()
 	{
-        window.location = "Index.jsp";
+        window.location = "index.jsp";
         }
-        function myFunc4()
-        {
-            window.location = "stage3.jsp";
-        }
+        
         function toggle(source) 
         {
         checkboxes = document.getElementsByName('foo');
@@ -253,6 +249,11 @@ body
                 checkboxes[i].checked = source.checked;
             }
         }
+        
+       function gotoMA()
+       {
+           window.location = 'ma.jsp';
+       }
   </script>
 	
 	
@@ -261,8 +262,8 @@ body
 <body style="overflow:hidden">
 
 <div id="StageGate">    
-    <button id="click" type="button" class="btn btn-info btn-arrow-right">File Available</button>
-    <button type="button" id="click" class="btn btn-info btn-arrow-right">Mnemonic analysis</button>
+    <button type="button" class="btn btn-info btn-arrow-right" style="background-color:#1d79fd">File Available</button>
+    <button id="click" type="button" class="btn btn-info btn-arrow-right">Mnemonic analysis</button>
     <button type="button" class="btn btn-info btn-arrow-right">Unit Normalisation</button>
     <button type="button" class="btn btn-info btn-arrow-right">HM</button>
     <button type="button" class="btn btn-info btn-arrow-right">Pattern Generation</button>
@@ -271,24 +272,27 @@ body
         <div class="row">
           
             <div class="col-sm-4"></div>
-            <div class="col-sm-4"></div>
+            <div class="col-sm-4">
+                <p id="demo" style="padding-top:25px"></p>
+            </div>
             
             <div class="col-sm-4"> 
                  <div class="btn-sm">
                     
-                     <button type="buton" class="btn-sm btn-primary dropdown-toggle" data-toggle="dropdown">Well Size
+                     <button type="button" class="btn-sm btn-primary dropdown-toggle" data-toggle="dropdown">Well Size
 			<span class="caret"></span>
                     </button>
                      <ul class="dropdown-menu" role="menu">
 			<li class="dropdown-header">Select the well size</li>
 			<li class="divider"></li>
-			<li><a href="#">100</a></li>
-			<li><a href="#">50</a></li>
-			<li><a href="#">20</a></li>
-			<li><a href="#">10</a></li>
+			<li><a href="#" onClick="sizeSelect100()">100</a></li>
+			<li><a href="#" onClick="sizeSelect50()">50</a></li>
+			<li><a href="#" onClick="sizeSelect20()">20</a></li>
+			<li><a href="#" onClick="sizeSelect10()">10</a></li>
                     </ul>
-                <form method="post" action="stage3.jsp">      
-                    <button type="button" class="btn-sm btn-primary" onClick="myFunc4()">Promote</button>
+                    
+                <form method="post" action="ma.jsp">     
+                    <button type="button" class="btn-sm btn-primary" onclick="gotoMA()">Promote</button>
                     <button type="button" class="btn-sm btn-primary">Demote</button>
                     <button type="button" class="btn-sm btn-primary glyphicon glyphicon-refresh" onClick="window.location.reload();"></button>   
 					
@@ -327,6 +331,7 @@ body
             </div>
         </div>
         
+            <!-- Jsp MongoDB code -->
         <%
              try 
              {
@@ -341,52 +346,56 @@ body
             <tr>
                 <th><input type="checkbox" onClick="toggle(this)"></input></th>
                 <th>Well Name</th>
+                <th>Field</th>
                 <th>Country</th>
                 <th>State</th>
                 <th>Operator</th>
+                <th>Region</th>
+                <th>TimeZone</th>
             </tr>
             
         <%
         while (iterator.hasNext()) {
             Document doc = iterator.next();
             String country = doc.getString("country");
-           
             String state = doc.getString("state");
             String Operator = doc.getString("operator");
+            
             String name = doc.getString("nameWell");%>
-           
             <input type="hidden" name="OPS" value=<%=Operator%>
-   
+        
             <tr class = "info">
+                <td>
+                    <input type="checkbox" name="foo" value="bar1"></input>
+                    <input type="hidden" name="state" value=<%=state%>
+                </td>
                 
                 <td>
-                   
-               <input type="checkbox" name="values" value=<%=name%> />
-               <input type="hidden" name="state" value=<%=state%>
-                       
+                    <% out.println(name);%>
+                    <input type="hidden" name="coun" value=<%=country%> 
                 </td>
-                <td><% out.println(name);%>
-                <input type="hidden" name="coun" value=<%=country%> </td>
                 <td><% out.println(country);%></td>
                 <td><% out.println(state);%></td>
-                            
-                                   <td><% out.println(Operator);%></td></tr> 
+                <td><% out.println(Operator);%></td>
+            </tr>
           <% }
-         
+          
           %>
             </table>
         </div>
     </div>
-<INPUT TYPE=submit name=submit Value="Promote">	
-             <%
+	
+    <INPUT TYPE=submit name=submit Value="Promote">	
+    <%
                  
-
-} catch (Exception e1) {
+    } 
+catch (Exception e1) 
+{
     // TODO Auto-generated catch block
     e1.printStackTrace();
 }
 %>
-</form>	
+    </form>
 
 </body>
 </html>
