@@ -257,7 +257,7 @@ body
         
         function gotoIndex()
         {
-            window.location = 'index.jsp';
+            window.location = 'Index.jsp';
         }
   </script>
 	
@@ -350,12 +350,9 @@ body
             <tr>
                 <th><input type="checkbox" onClick="toggle(this)"></input></th>
                 <th>Well Name</th>
-                <th>Field</th>
                 <th>Country</th>
                 <th>State</th>
                 <th>Operator</th>
-                <th>Region</th>
-                <th>TimeZone</th>
             </tr>
             
         
