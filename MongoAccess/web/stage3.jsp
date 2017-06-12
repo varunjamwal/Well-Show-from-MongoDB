@@ -104,7 +104,10 @@
   color: #e1ffff;
 }
 
-
+.nodata
+{
+    font-family:verdana; font-size:30px; text-align:center;
+}
 .nav-side-menu ul,.nav-side-menu li 
 {
   list-style: none;
@@ -238,7 +241,7 @@ body
 	}
         function myFunc3()
 	{
-        window.location = "Index.jsp";
+        window.location = "index.jsp";
         }
         
         function toggle(source) 
@@ -257,7 +260,7 @@ body
         
         function gotoIndex()
         {
-            window.location = 'Index.jsp';
+            window.location = 'index.jsp';
         }
   </script>
 	
@@ -343,16 +346,26 @@ body
             String[] selectedOperator = request.getParameterValues("OPS");
             String[]  selectedCountry = request.getParameterValues("coun"); 
             String[] selectedState = request.getParameterValues("state");
+            String[] selectedRegion = request.getParameterValues("reg");
+            String[] selectedStatus = request.getParameterValues("status");
+            String[] selectedPurpose = request.getParameterValues("purpose");
         %>
         
         <div class="col-sm-10">
-        	<table class="table table-hover">
+            <% if(selectedNames == null){
+                %>
+                <h1 class="nodata"><%out.print("No Data Entered");}
+else{%></h1>
+            <table class="table table-hover">
             <tr>
                 <th><input type="checkbox" onClick="toggle(this)"></input></th>
                 <th>Well Name</th>
                 <th>Country</th>
                 <th>State</th>
                 <th>Operator</th>
+                <th>Region</th>
+                <th>Status</th>
+                <th>Purpose</th>
             </tr>
             
         
@@ -361,18 +374,22 @@ body
               
           %>
           
-          <tr> 
+          <tr class="info"> 
                 <td><input type="checkbox" /></td>
                 <td><% out.println(selectedNames[i]); %></td>
                 <td><% out.println(selectedCountry[i]); %></td>
                 <td><% out.println(selectedState[i]);%></td>
                 <td><% out.println(selectedOperator[i]);%></td>
+                <td><% out.println(selectedRegion[i]);%></td>
+                <td><% out.println(selectedStatus[i]);%></td>
+                <td><% out.println(selectedPurpose[i]);%></td>
             </tr>
         </div>
     </div>
 	
     <%    
     }
+}
     %>
     </table>
     <%
