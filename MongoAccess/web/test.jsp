@@ -203,6 +203,8 @@ body
   margin: 0px;
   padding: 0px;
 }
+
+#promotebtn{width:70px; height:32px; border-radius:3px; background-color:#1c79af; color:white; border-left-color:#2474a6; border-top-color:#2474a6; border-right-color:black; border-bottom-color:black}
 		
 	</style>
 
@@ -268,7 +270,7 @@ body
     <button type="button" class="btn btn-info btn-arrow-right">HM</button>
     <button type="button" class="btn btn-info btn-arrow-right">Pattern Generation</button>
 </div>	
-	
+	<form method="post" action="ma.jsp">
         <div class="row">
           
             <div class="col-sm-4"></div>
@@ -290,8 +292,8 @@ body
 			<li><a href="#" onClick="sizeSelect20()">20</a></li>
 			<li><a href="#" onClick="sizeSelect10()">10</a></li>
                     </ul>
-               <form method="post" action="stage3.jsp">     
-                    <INPUT TYPE=submit name=submit Value="Promote">	
+                    
+                    <INPUT id="promotebtn" TYPE=submit name=submit Value="Promote">	
                     <button type="button" class="btn-sm btn-primary" onClick="">Demote</button>
                     <button type="button" class="btn-sm btn-primary glyphicon glyphicon-refresh" onClick="window.location.reload();"></button>   
 					
@@ -307,7 +309,7 @@ body
             	<div class="menu-list">
                 	<ul id="menu-content" class="menu-content collapse in">
                     	<li  data-toggle="collapse" data-target="#products" class="collapsed active">
-                  			<a href="#"><i class="glyphicon glyphicon-chevron-right"></i> DASHBOARD</a>
+                  			<a href="#"><i class="glyphicon glyphicon-chevron-right"></i> Dashboard</a>
                 		</li>
                         	<ul class="sub-menu collapse" id="products">
                                     <li><a href="#"></a></li>
@@ -347,33 +349,51 @@ body
                 <th>Country</th>
                 <th>State</th>
                 <th>Operator</th>
+                <th>Region</th>
+                <th>Status</th>
+                <th>Purpose</th>
             </tr>
             
         <%
         while (iterator.hasNext()) {
             Document doc = iterator.next();
             String country = doc.getString("country");
-           
             String state = doc.getString("state");
             String Operator = doc.getString("operator");
-            String name = doc.getString("nameWell");%>
+            String name = doc.getString("nameWell");
+            String region = doc.getString("region");
+            String statusWell = doc.getString("statusWell");
+            String purposeWell = doc.getString("purposeWell");
+            
+            
+        %>
            
-            <input type="hidden" name="OPS" value=<%=Operator%>
+            <input type="hidden" name="OPS" value=<%=Operator%> />
    
             <tr class = "info">
                 
                 <td>
                    
                <input type="checkbox" name="values" value=<%=name%> />
-               <input type="hidden" name="state" value=<%=state%>
-                       
-                </td>
-                <td><% out.println(name);%>
-                <input type="hidden" name="coun" value=<%=country%> </td>
+               
+               
+               
+               <input type="hidden" name="purpose" value=<%=purposeWell%> />
+               
+               </td>
+                
+               <td><% out.println(name);%></td>
+                <input type="hidden" name="coun" value=<%=country%> /> 
                 <td><% out.println(country);%></td>
+                <input type="hidden" name="state" value=<%=state%> />
                 <td><% out.println(state);%></td>
-                            
-                                   <td><% out.println(Operator);%></td></tr> 
+                <td><% out.println(Operator);%></td>
+                    <input type="hidden" name="reg" value=<%=region%> />
+                <td><% out.println(region);%></td>
+                        <input type="hidden" name="status" value=<%=statusWell%> />
+                <td><% out.println(statusWell);%></td>
+                <td><% out.println(purposeWell);%></td>
+            </tr> 
           <% }
          
           %>
