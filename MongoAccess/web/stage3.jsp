@@ -351,6 +351,10 @@ body
       
             String[] selectedNames = request.getParameterValues("values");
 
+            if(request.getParameter("values")!=null){%>
+            
+            <%
+            
                 MongoClient client = new MongoClient("localhost", 27017);
 		MongoDatabase database = client.getDatabase("rig_witsml");
 		MongoCollection collection = database.getCollection("well");
@@ -360,15 +364,15 @@ body
                 FindIterable<Document> mydatabaserecords = database.getCollection("well").find();
                 MongoCursor<Document> iterator = mydatabaserecords.iterator();
 
-                if(selectedNames.length==0){%>
-                <h1 class="nodata"><%out.println("No Promote Value Selected");%></h1>   
-                <%    }else
-                    {            for(int i=0;i<selectedNames.length;i++){
+                for(int i=0;i<selectedNames.length;i++){
                         BasicDBObject searchQuery = new BasicDBObject().append("nameWell", selectedNames[i]);
                         collection.updateMany(searchQuery, newDocument);
                 }
-                            }
                 response.sendRedirect("DisplayPromoted.jsp");
+                            }
+else{
+                response.sendRedirect("DisplayPromoted.jsp");
+}
 %>
 </body>
 </html>
