@@ -88,7 +88,7 @@
 			}
 	
 			#table{padding-top:30px; font-size:11px; text-align:justify; color:#666;}
-                        #StageGate{padding-bottom:18px; margin-left:100px}
+                        #StageGate{padding-bottom:18px; margin-left:100px; padding-bottom:3px}
 			
 	/*navigation*/		
 .nav-side-menu 
@@ -290,21 +290,21 @@ body
 </div>	
     
 <!--Displaying Dynamic table rows selected-->
-<div class="row" style="padding-bottom:20px">
+<div class="row" style="padding-bottom:0px; margin-top:0px">
     <div class="col-sm-2"></div>
     <div class="col-sm-2"><%out.println(count);%>/ <%out.print(total);%></div>
-    <div class="col-sm-1"><%out.println(count1);%>/ <%out.print(total);%></div>
-    <div class="col-sm-2" style="padding-left:90px">-</div>
-    <div class="col-sm-2" style="padding-left:40px">-</div>
-    <div class="col-sm-2">-</div>
+    <div class="col-sm-1" style="padding-left:50px"><%out.println(count1);%>/ <%out.print(total);%></div>
+    <div class="col-sm-2" style="padding-left:90px">0 / 0</div>
+    <div class="col-sm-2" style="padding-left:40px">0 / 0</div>
+    <div class="col-sm-2">0 / 0</div>
     <div class="col-sm-1"></div>
 </div>    
 	<form method="post" action="stage3.jsp">
-        <div class="row">
+        <div class="row" style="margin-bottom:0px">
           
             <div class="col-sm-4"></div>
             <div class="col-sm-4">
-                <p id="demo" style="padding-top:25px"></p>
+                <p id="demo" style="padding-top:12px; font-size:11px"></p>
             </div>
             
             <div class="col-sm-4"> 
@@ -325,14 +325,14 @@ body
                     <INPUT id="promotebtn" TYPE=submit name=submit Value="Promote">	
                     <button type="button" class="btn-sm btn-primary">Demote</button>
                     <button type="button" class="btn-sm btn-primary glyphicon glyphicon-refresh" onClick="window.location.reload();"></button>   
-                    <button type="button" class="btn-sm btn-primary" onclick="displayall()">DISPLAY ALL</button>					
+                    <button type="button" class="btn-sm btn-primary" onclick="displayall()">All</button>					
 					
                  </div>       
 	</div>
 </div>
 </div>
       
-        <div class="row" id="table">
+        <div class="row" id="table" style="margin-top:0px; padding-top:10px">
     	<div class="col-sm-2">
         	<div class="nav-side-menu">
             
@@ -368,9 +368,9 @@ body
        %>
         
         
-        <div class="col-sm-10">
-        	<table class="table table-hover">
-            <tr>
+        <div class="col-sm-10" style="margin-top:0px; padding-top:0px">
+        <table class="table table-striped table-bordered" style="margin-top:0px;">
+            <tr class="info">
                 <th><input type="checkbox" onClick="toggle(this)"></input></th>
                 <th>Well Name</th>
                 <th>Country</th>
@@ -395,11 +395,11 @@ body
              Integer flag = docs.getInteger("flag");
             if(flag == 0){
         %>
-            <tr class = "info">
+            <tr class = "default">
                 <td>  
-               <input type="checkbox" name="values" value=<%=name%> />
+                    <input type="checkbox" name="values" value=<%=name%> />
                  </td>
-               <td><% out.println(name);%></td>
+                <td><% out.println(name);%></td>
                 <td><% out.println(country);%></td>
                 <td><% out.println(state);%></td>
                 <td><% out.println(Operator);%></td>
