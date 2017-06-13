@@ -1,3 +1,5 @@
+<%@page import="com.mongodb.BasicDBObject"%>
+<%@page import="com.mongodb.DBCollection"%>
 <%@page import="com.mongodb.client.FindIterable"%>
 <%@page import="com.mongodb.MongoClient"%>
 <%@page import="com.mongodb.MongoClientURI"%>
@@ -86,7 +88,7 @@
 			}
 	
 			#table{padding-top:30px; font-size:11px; text-align:justify; color:#666;}
-                        #StageGate{padding-bottom:18px}
+                        #StageGate{padding-bottom:18px; margin-left:100px}
 			
 	/*navigation*/		
 .nav-side-menu 
@@ -205,7 +207,8 @@ body
 }
 
 #promotebtn{width:70px; height:32px; border-radius:3px; background-color:#1c79af; color:white; border-left-color:#2474a6; border-top-color:#2474a6; border-right-color:black; border-bottom-color:black}
-		
+
+
 	</style>
 
     <script>
@@ -252,9 +255,9 @@ body
             }
         }
         
-       function gotoMA()
+       function goma()
        {
-           window.location = 'test.jsp';
+           window.location = 'DisplayPromoted.jsp';
        }
   </script>
 	
@@ -262,14 +265,40 @@ body
 </head>
 
 <body style="overflow:hidden">
-
+  
+        <% long count = 0;
+            long count1 = 0;
+            long total = 0;
+             try 
+             {
+                MongoClient mongoClient = new MongoClient();
+                MongoDatabase database = mongoClient.getDatabase("rig_witsml");
+                MongoCollection collection = database.getCollection("well");
+                BasicDBObject searchQuery = new BasicDBObject().append("flag", 0);
+                BasicDBObject searchQuery1 = new BasicDBObject().append("flag", 2);
+                count = collection.count(searchQuery);
+                count1 = collection.count(searchQuery1);
+                total = collection.count();
+                
+        %>
 <div id="StageGate">    
     <button type="button" class="btn btn-info btn-arrow-right" style="background-color:#1d79fd">File Available</button>
-    <button id="click" type="button" class="btn btn-info btn-arrow-right">Mnemonic analysis</button>
+    <button id="click" type="button" class="btn btn-info btn-arrow-right" onclick="goma()">Mnemonic analysis</button>
     <button type="button" class="btn btn-info btn-arrow-right">Unit Normalisation</button>
-    <button type="button" class="btn btn-info btn-arrow-right">HM</button>
+    <button type="button" class="btn btn-info btn-arrow-right">Harmonic Minimization</button>
     <button type="button" class="btn btn-info btn-arrow-right">Pattern Generation</button>
 </div>	
+    
+<!--Displaying Dynamic table rows selected-->
+<div class="row" style="padding-bottom:20px">
+    <div class="col-sm-2"></div>
+    <div class="col-sm-2"><%out.println(count);%>/ <%out.print(total);%></div>
+    <div class="col-sm-1"><%out.println(count1);%>/ <%out.print(total);%></div>
+    <div class="col-sm-2" style="padding-left:90px">-</div>
+    <div class="col-sm-2" style="padding-left:40px">-</div>
+    <div class="col-sm-2">-</div>
+    <div class="col-sm-1"></div>
+</div>    
 	<form method="post" action="stage3.jsp">
         <div class="row">
           
@@ -294,8 +323,9 @@ body
                     </ul>
                     
                     <INPUT id="promotebtn" TYPE=submit name=submit Value="Promote">	
-                    <button type="button" class="btn-sm btn-primary" onClick="">Demote</button>
+                    <button type="button" class="btn-sm btn-primary">Demote</button>
                     <button type="button" class="btn-sm btn-primary glyphicon glyphicon-refresh" onClick="window.location.reload();"></button>   
+                    <button type="button" class="btn-sm btn-primary" onclick="displayall()">DISPLAY ALL</button>					
 					
                  </div>       
 	</div>
@@ -331,15 +361,12 @@ body
                 </div>
             </div>
         </div>
-        
         <%
-             try 
-             {
-                MongoClient mongoClient = new MongoClient();
-                MongoDatabase database = mongoClient.getDatabase("rig_witsml");
-                FindIterable<Document> mydatabaserecords = database.getCollection("well").find();
-                MongoCursor<Document> iterator = mydatabaserecords.iterator();
-        %>
+           FindIterable<Document> mydatabaserecords = database.getCollection("well").find();
+            MongoCursor<Document> iterator = mydatabaserecords.iterator();
+           
+       %>
+        
         
         <div class="col-sm-10">
         	<table class="table table-hover">
@@ -355,20 +382,20 @@ body
             </tr>
             
         <%
+
         while (iterator.hasNext()) {
-            Document doc = iterator.next();
-            String country = doc.getString("country");
-            String state = doc.getString("state");
-            String Operator = doc.getString("operator");
-            String name = doc.getString("nameWell");
-            String region = doc.getString("region");
-            String statusWell = doc.getString("statusWell");
-            String purposeWell = doc.getString("purposeWell");
-            Integer flag = doc.getInteger("flag");
-            if(flag ==0){
+             Document docs = iterator.next();
+            String country = docs.getString("country");
+            String state = docs.getString("state");
+            String Operator = docs.getString("operator");
+            String name = docs.getString("nameWell");
+            String region = docs.getString("region");
+            String statusWell = docs.getString("statusWell");
+            String purposeWell = docs.getString("purposeWell");
+             Integer flag = docs.getInteger("flag");
+            if(flag == 0){
         %>
             <tr class = "info">
-                
                 <td>  
                <input type="checkbox" name="values" value=<%=name%> />
                  </td>
