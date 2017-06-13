@@ -12,7 +12,7 @@
 <%@page import="static com.mongodb.client.model.Updates.*"%>
 <%@page import="com.mongodb.client.result.UpdateResult"%>
 <%@page import="java.util.ArrayList"%>
-<%@page import="java.util.List"%>
+<%@page import="java.util.List"%> 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -266,6 +266,9 @@ body
         function back(){
             window.location = 'test.jsp';
         }
+        function displayall(){
+            window.location = 'displayall.jsp';
+        }
   </script>
 	
 	
@@ -306,7 +309,7 @@ body
                     <button type="button" class="btn-sm btn-primary"  onclick="gotoUN()">Promote</button>
                     <button type="button" class="btn-sm btn-primary" onclick="gotoIndex()">Demote</button>
                     <button type="button" class="btn-sm btn-primary glyphicon glyphicon-refresh" onClick="window.location.reload();"></button>   
-					
+                    <button type="button" class="btn-sm btn-primary" onclick="displayall()">DISPLAY ALL</button>					
                  </div>       
 	</div>
 </div>
@@ -356,59 +359,16 @@ body
                 newDocument.append("$set", new BasicDBObject().append("flag", 2));
                 FindIterable<Document> mydatabaserecords = database.getCollection("well").find();
                 MongoCursor<Document> iterator = mydatabaserecords.iterator();
-                for(int i=0;i<selectedNames.length;i++){
+
+                if(selectedNames.length==0){%>
+                <h1 class="nodata"><%out.println("No Promote Value Selected");%></h1>   
+                <%    }else
+                    {            for(int i=0;i<selectedNames.length;i++){
                         BasicDBObject searchQuery = new BasicDBObject().append("nameWell", selectedNames[i]);
                         collection.updateMany(searchQuery, newDocument);
                 }
-        %>
-        
-        <div class="col-sm-10">
-            <table class="table table-hover">
-            <tr>
-                <th><input type="checkbox" onClick="toggle(this)"></input></th>
-                <th>Well Name</th>
-                <th>Country</th>
-                <th>State</th>
-                <th>Operator</th>
-                <th>Region</th>
-                <th>Status</th>
-                <th>Purpose</th>
-            </tr>
-            
-        <%
-        while (iterator.hasNext()) {
-            Document doc = iterator.next();
-            String country = doc.getString("country");
-            String state = doc.getString("state");
-            String Operator = doc.getString("operator");
-            String name = doc.getString("nameWell");
-            String region = doc.getString("region");
-            String statusWell = doc.getString("statusWell");
-            String purposeWell = doc.getString("purposeWell");
-            Integer flag = doc.getInteger("flag").intValue();
-            if (flag ==2){
-        %>
-            <tr class = "info">
-                <td>  
-               <input type="checkbox" name="values" value=<%=name%> />
-                 </td>
-               <td><% out.println(name);%></td>
-                <td><% out.println(country);%></td>
-                <td><% out.println(state);%></td>
-                <td><% out.println(Operator);%></td>
-                <td><% out.println(region);%></td>
-                <td><% out.println(statusWell);%></td>
-                <td><% out.println(purposeWell);%></td>
-            </tr> 
-        </div>
-        </div>
-   
-    <%
-}
-}
-
+                            }
+                response.sendRedirect("DisplayPromoted.jsp");
 %>
-	
- </table>
 </body>
 </html>
