@@ -293,11 +293,11 @@ body
     
 <div class="row" style="padding-bottom:0px; margin-top:0px">
     <div class="col-sm-2"></div>
-    <div class="col-sm-2"><%out.println(count);%>/ <%out.print(total);%></div>
-    <div class="col-sm-1" style="padding-left:50px"><%out.println(count1);%>/ <%out.print(total);%></div>
-    <div class="col-sm-2" style="padding-left:90px">0 / 0</div>
-    <div class="col-sm-2" style="padding-left:40px">0 / 0</div>
-    <div class="col-sm-2">0 / 0</div>
+    <div class="col-sm-2" style="color:#01579b"><%out.println(count);%>/ <%out.print(total);%></div>
+    <div class="col-sm-1" style="padding-left:50px; color:#01579b"><%out.println(count1);%>/ <%out.print(total);%></div>
+    <div class="col-sm-2" style="padding-left:90px; color:#01579b">0 / 0</div>
+    <div class="col-sm-2" style="padding-left:40px; color:#01579b">0 / 0</div>
+    <div class="col-sm-2" style="color:#01579b">0 / 0</div>
     <div class="col-sm-1"></div>
 </div>        
     
@@ -327,7 +327,7 @@ body
                     <button type="button" class="btn-sm btn-primary">Promote</button>					
                     <INPUT id="promotebtn" TYPE=submit name=submit Value="Demote">
                     <button type="button" class="btn-sm btn-primary glyphicon glyphicon-refresh" onClick="window.location.reload();"></button>   
-                    <button type="button" class="btn-sm btn-primary" onclick="displayall()">All</button>					
+                    <button type="button" class="btn-sm btn-primary" onclick="displayall()">View All</button>					
 					
                  </div>       
 	</div>
@@ -374,7 +374,7 @@ body
        
         
         <div class="col-sm-10" style="margin-top:0px; padding-top:0px">
-        <table class="table table-striped table-bordered" style="margin-top:0px">
+        <table class="table table-striped table-bordered table-condensed" style="margin-top:0px">
             <tr class="info">
                 <th><input type="checkbox" onClick="toggle(this)"></input></th>
                 <th>Well Name</th>
