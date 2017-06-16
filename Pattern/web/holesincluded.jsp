@@ -154,7 +154,8 @@ body
 #promotebtn{width:70px; height:32px; border-radius:3px; background-color:#1c79af; color:white; border-left-color:#2474a6; border-top-color:#2474a6; border-right-color:black; border-bottom-color:black}
 #navHeading{padding-left:10px; padding-bottom:4px; font-family:verdana; font-size:26px}
 #navHeading a{text-decoration:none}
-body {background-color:#ebebeb}
+body {background-color:#ebebeb; overflow-x:hidden; overflow-y:scroll}
+#navlist li{display:inline}
 
 	</style>
 
@@ -163,7 +164,7 @@ body {background-color:#ebebeb}
 	
 </head>
 
-<body>
+    <body>
   
   
 		<div class="row">
@@ -180,7 +181,7 @@ body {background-color:#ebebeb}
 			</div>
 		</div>
   
-	<div class="row" style="margin-top:0px; padding-top:10px">
+	<div class="row" style="margin-top:0px; padding-top:0px">
             <div class="col-sm-2" style="background-color:red">
         	<div class="nav-side-menu left-nav">
                     <div class="menu-list">
@@ -221,17 +222,17 @@ body {background-color:#ebebeb}
                     
         %>
 		
-		<div class="col-sm-4" style="padding-left:80px">
+		<div class="col-sm-4" style="padding-left:25px; padding-right:25px">
 			<div class="panel panel-default">
 			
 				<div class="panel-heading">
 					<h4 class="panel-title">
-						<a data-toggle="collapse" href="#collapse1" style="text-decoration:none">Fields<span class="glyphicon glyphicon-plus-sign" style="padding-left:270px"></span></a>
+						<a data-toggle="collapse" href="#collapse1" style="text-decoration:none; color:#3d82b8; font-size:13px">Fields<span class="glyphicon glyphicon-plus-sign" style="padding-left:318px"></span></a>
 					</h4>
 				</div>
 				<div id="collapse1" class="panel-collapse collapse in">
 					<div class="panel-body" style="max-height:200px; overflow-y:scroll">
-                                            <ul style="list-style-type:none">
+                                            <ul style="list-style-type:none; color:#74bcd4">
 						<%
                                                     for (String document : documents) {
                                                         %>
@@ -243,7 +244,7 @@ body {background-color:#ebebeb}
                                                
 				<div class="panel-heading">
 					<h4 class="panel-title">
-						<a data-toggle="collapse" href="#collapse2" style="text-decoration:none">Wells<span class="glyphicon glyphicon-plus-sign" style="padding-left:274px"></span></a>
+						<a data-toggle="collapse" href="#collapse2" style="text-decoration:none; color:#3d82b8; font-size:13px">Wells<span class="glyphicon glyphicon-plus-sign" style="padding-left:321px"></span></a>
 					</h4>
 				</div>
                                
@@ -260,7 +261,7 @@ body {background-color:#ebebeb}
                                            if(checked.equals("yes") && wells !=null ){    
                                 %>	
                                         
-                                            <ul style="list-style-type:none">
+                                            <ul style="list-style-type:none; color:#74bcd4">
                                                 <li><input type="checkbox" name="welllist" value="<%=wells%>"><% out.println(wells); %></li>
                                             </ul>
                                             
@@ -280,7 +281,7 @@ body {background-color:#ebebeb}
 			
 				<div class="panel-heading">
 					<h4 class="panel-title">
-						<a data-toggle="collapse" href="#collapse3" style="text-decoration:none">Hole Size<span class="glyphicon glyphicon-plus-sign" style="padding-left:244px"></span></a>
+						<a data-toggle="collapse" href="#collapse3" style="text-decoration:none; color:#3d82b8; font-size:13px">Hole Size<span class="glyphicon glyphicon-plus-sign" style="padding-left:297px"></span></a>
 					</h4>
 				</div>
 				<div id="collapse3" class="panel-collapse collapse in">
@@ -295,7 +296,7 @@ body {background-color:#ebebeb}
                                            String wchecked = newdoc.getString("wellchecked");
                                            if(wchecked.equals("yes") && hole != null){ %>   
                                 	
-                                            <ul style="list-style-type:none">
+                                            <ul style="list-style-type:none; color:#74bcd4">
                                                 <li><input type="checkbox" name="holes" value="<%=hole%>"> <% out.println(hole); %></li>
                                             </ul>
                                              <% 
@@ -311,8 +312,8 @@ catch(Exception e){
                         </div> 
                                                 
                         <div class="btn center-block">                           
-                        <button type="submit" class="btn btn-primary" formaction="fieldupdate.jsp" >Update</button>
-                        <button type="submit" class="btn btn-primary glyphicon glyphicon-refresh" formaction="refresh.jsp"></button>
+                        <button type="submit" class="btn btn-sm btn-primary" formaction="fieldupdate.jsp" >Update</button>
+                        <button type="submit" class="btn btn-sm btn-primary glyphicon glyphicon-refresh" formaction="refresh.jsp"></button>
                     </div> 
                                         
                 </div>
@@ -320,13 +321,44 @@ catch(Exception e){
                
 		
 		
-		<div class="col-sm-5">
-			<div class="panel panel-default" style="height:400px; background-color:#f4f4f5">
-				<!--Panel Content-->
+		<div class="col-sm-5" style="padding-left:0px">
+			<div class="panel panel-default" style="max-height:300px; background-color:#f4f4f5; overflow-y:scroll">
+                            <div class="panel" style="max-height:100px; overflow-y:scroll; background-color:#f8f8f9">
+                                <h3 class="text"><small style="color:#3d82b8; padding-left:15px; font-size:13px">Field Name</small></h3>
+                                    <ul id="navlist" style="color:#74bcd4">
+                                        
+                                    </ul>
+                            </div>
+                            
+                            <div class="panel" style="max-height:100px; overflow-y:scroll; background-color:#f8f8f9">
+                                <h3 class="text"><small style="color:#3d82b8; padding-left:15px; font-size:13px">Well Name</small></h3>
+                                    <ul id="navlist" style="color:#74bcd4">
+                                        
+                                    </ul>
+                            </div>
+                            
+                            <div class="panel" style="max-height:100px; overflow-y:scroll; background-color:#f8f8f9">
+                                <h3 class="text"><small style="color:#3d82b8; padding-left:15px; font-size:13px">Hole Size</small></h3>
+                                    <ul id="navlist" style="color:#74bcd4">
+                                        
+                                    </ul>
+                            </div>
 			</div>
 			
-			<button type="button" class="btn btn-primary center-block">Generate</button>
+			<button type="button" class="btn btn-sm btn-primary center-block">Generate</button>
+                        
+                        <div class="panel panel-default" style="max-height:300px; background-color:#f4f4f4f5; overflow-y:scroll; margin-top:19px">
+                            <div class="panel" style="max-height:100px; background-color:#f8f8f9">
+                                <h3 class="text"><small style="color:#3d82b8; padding-left:15px; font-size:13px">Mnemonic</small></h3>
+                                    <ul id="navlist" style="color:#74bcd4">
+                                        
+                                    </ul>
+                            </div>
+                        </div>  
+                        
 		</div>
+                                        
+                <div class="col-sm-1"></div>                        
        
     </div>  
         
