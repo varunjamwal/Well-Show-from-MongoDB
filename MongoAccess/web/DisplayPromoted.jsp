@@ -1,5 +1,4 @@
 <%@page import="com.mongodb.BasicDBObject"%>
-<%@page import="com.mongodb.DBCollection"%>
 <%@page import="com.mongodb.client.FindIterable"%>
 <%@page import="com.mongodb.MongoClient"%>
 <%@page import="com.mongodb.MongoClientURI"%>
@@ -207,8 +206,7 @@ body
 }
 
 #promotebtn{width:70px; height:32px; border-radius:3px; background-color:#1c79af; color:white; border-left-color:#2474a6; border-top-color:#2474a6; border-right-color:black; border-bottom-color:black}
-
-
+		
 	</style>
 
     <script>
@@ -243,7 +241,7 @@ body
 	}
         function myFunc3()
 	{
-        window.location = "index.jsp";
+        window.location = "test.jsp";
         }
         
         function toggle(source) 
@@ -259,14 +257,18 @@ body
        {
            window.location = 'DisplayPromoted.jsp';
        }
+       function demote()
+       {
+           window.location = 'Demote.jsp';           
+       }
   </script>
 	
 	
 </head>
 
 <body style="overflow:hidden">
-  
-        <% long count = 0;
+    
+    <% long count = 0;
             long count1 = 0;
             long total = 0;
              try 
@@ -279,17 +281,16 @@ body
                 count = collection.count(searchQuery);
                 count1 = collection.count(searchQuery1);
                 total = collection.count();
-                
         %>
+
 <div id="StageGate">    
-    <button type="button" class="btn btn-info btn-arrow-right" style="background-color:#1d79fd">File Available</button>
-    <button id="click" type="button" class="btn btn-info btn-arrow-right" onclick="goma()">Mnemonic analysis</button>
+    <button type="button" class="btn btn-info btn-arrow-right" onclick="myFunc3()">File Available</button>
+    <button id="click" type="button" class="btn btn-info btn-arrow-right" onclick="goma()" style="background-color:#1d79fd">Mnemonic analysis</button>
     <button type="button" class="btn btn-info btn-arrow-right">Unit Normalisation</button>
     <button type="button" class="btn btn-info btn-arrow-right">Harmonic Minimization</button>
     <button type="button" class="btn btn-info btn-arrow-right">Pattern Generation</button>
 </div>	
     
-<!--Displaying Dynamic table rows selected-->
 <div class="row" style="padding-bottom:0px; margin-top:0px">
     <div class="col-sm-2"></div>
     <div class="col-sm-2" style="color:#01579b"><%out.println(count);%>/ <%out.print(total);%></div>
@@ -298,9 +299,10 @@ body
     <div class="col-sm-2" style="padding-left:40px; color:#01579b">0 / 0</div>
     <div class="col-sm-2" style="color:#01579b">0 / 0</div>
     <div class="col-sm-1"></div>
-</div>    
-	<form method="post" action="stage3.jsp">
-        <div class="row" style="margin-bottom:0px">
+</div>        
+    
+	<form method="post" action="Demote.jsp">
+        <div class="row">
           
             <div class="col-sm-4"></div>
             <div class="col-sm-4">
@@ -322,8 +324,8 @@ body
 			<li><a href="#" onClick="sizeSelect10()">10</a></li>
                     </ul>
                     
-                    <INPUT id="promotebtn" TYPE=submit name=submit Value="Promote">	
-                    <button type="button" class="btn-sm btn-primary">Demote</button>
+                    <button type="button" class="btn-sm btn-primary">Promote</button>					
+                    <INPUT id="promotebtn" TYPE=submit name=submit Value="Demote">
                     <button type="button" class="btn-sm btn-primary glyphicon glyphicon-refresh" onClick="window.location.reload();"></button>   
                     <button type="button" class="btn-sm btn-primary" onclick="displayall()">View All</button>					
 					
@@ -348,31 +350,34 @@ body
 				    <li><a href="#"></a></li>
                             </ul>
                             
-                            <!--<li data-toggle="collapse" data-target="#service" class="collapsed">
-                  		<a href="#"><i class="glyphicon glyphicon-chevron-right"></i>Button</a>
-                            </li>  
+                            <!--
+                                <li data-toggle="collapse" data-target="#service" class="collapsed">
+                                    <a href="#"><i class="glyphicon glyphicon-chevron-right"></i>Button</a>
+                                </li>  
 							
-			<ul class="sub-menu collapse" id="service">
-			  <li><a href="#"></a></li>
-			  <li><a href="#"></a></li>
-			</ul>
+                                <ul class="sub-menu collapse" id="service">
+                                    <li><a href="#"></a></li>
+                                    <li><a href="#"></a></li>
+                                </ul>
                             -->
                     </ul>
                 </div>
             </div>
         </div>
+        
         <%
+
            FindIterable<Document> mydatabaserecords = database.getCollection("well").find();
             MongoCursor<Document> iterator = mydatabaserecords.iterator();
            
        %>
-        
+       
         
         <div class="col-sm-10" style="margin-top:0px; padding-top:0px">
-        <table class="table table-striped table-bordered table-condensed" style="margin-top:0px; font-size:11px">
+        <table class="table table-striped table-bordered table-condensed" style="margin-top:0px">
             <tr class="info">
                 <th><input type="checkbox" onClick="toggle(this)"></input></th>
-                <th><a href="#">Well Name</a></th>
+                <th>Well Name</th>
                 <th>Country</th>
                 <th>State</th>
                 <th>Operator</th>
@@ -382,24 +387,24 @@ body
             </tr>
             
         <%
-
         while (iterator.hasNext()) {
-             Document docs = iterator.next();
-            String country = docs.getString("country");
-            String state = docs.getString("state");
-            String Operator = docs.getString("operator");
-            String name = docs.getString("nameWell");
-            String region = docs.getString("region");
-            String statusWell = docs.getString("statusWell");
-            String purposeWell = docs.getString("purposeWell");
-             Integer flag = docs.getInteger("flag");
-            if(flag == 0){
+            Document doc = iterator.next();
+            String country = doc.getString("country");
+            String state = doc.getString("state");
+            String Operator = doc.getString("operator");
+            String name = doc.getString("nameWell");
+            String region = doc.getString("region");
+            String statusWell = doc.getString("statusWell");
+            String purposeWell = doc.getString("purposeWell");
+            Integer flag = doc.getInteger("flag");
+            if(flag ==2){
         %>
             <tr class = "default">
+                
                 <td>  
-                    <input type="checkbox" name="values" value=<%=name%> />
+               <input type="checkbox" name="values" value=<%=name%> />
                  </td>
-                <td><% out.println(name);%></td>
+               <td><% out.println(name);%></td>
                 <td><% out.println(country);%></td>
                 <td><% out.println(state);%></td>
                 <td><% out.println(Operator);%></td>

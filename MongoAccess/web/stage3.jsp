@@ -1,5 +1,4 @@
 <%@page import="com.mongodb.BasicDBObject"%>
-<%@page import="com.mongodb.DBCollection"%>
 <%@page import="com.mongodb.client.FindIterable"%>
 <%@page import="com.mongodb.MongoClient"%>
 <%@page import="com.mongodb.MongoClientURI"%>
@@ -13,7 +12,7 @@
 <%@page import="static com.mongodb.client.model.Updates.*"%>
 <%@page import="com.mongodb.client.result.UpdateResult"%>
 <%@page import="java.util.ArrayList"%>
-<%@page import="java.util.List"%>
+<%@page import="java.util.List"%> 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -88,7 +87,7 @@
 			}
 	
 			#table{padding-top:30px; font-size:11px; text-align:justify; color:#666;}
-                        #StageGate{padding-bottom:18px; margin-left:100px; padding-bottom:3px}
+                        #StageGate{padding-bottom:18px}
 			
 	/*navigation*/		
 .nav-side-menu 
@@ -106,7 +105,10 @@
   color: #e1ffff;
 }
 
-
+.nodata
+{
+    font-family:verdana; font-size:30px; text-align:center;
+}
 .nav-side-menu ul,.nav-side-menu li 
 {
   list-style: none;
@@ -205,10 +207,7 @@ body
   margin: 0px;
   padding: 0px;
 }
-
-#promotebtn{width:70px; height:32px; border-radius:3px; background-color:#1c79af; color:white; border-left-color:#2474a6; border-top-color:#2474a6; border-right-color:black; border-bottom-color:black}
-
-
+		
 	</style>
 
     <script>
@@ -248,63 +247,48 @@ body
         
         function toggle(source) 
         {
-        checkboxes = document.getElementsByName('values');
+        checkboxes = document.getElementsByName('foo');
         for(var i=0, n=checkboxes.length;i<n;i++) 
             {
                 checkboxes[i].checked = source.checked;
             }
         }
         
-       function goma()
-       {
-           window.location = 'DisplayPromoted.jsp';
-       }
+        function gotoUN()
+        {
+            window.location = 'un.jsp';
+        }
+        
+        function gotoIndex()
+        {
+           
+        }
+        function back(){
+            window.location = 'test.jsp';
+        }
+        function displayall(){
+            window.location = 'displayall.jsp';
+        }
   </script>
 	
 	
 </head>
 
 <body style="overflow:hidden">
-  
-        <% long count = 0;
-            long count1 = 0;
-            long total = 0;
-             try 
-             {
-                MongoClient mongoClient = new MongoClient();
-                MongoDatabase database = mongoClient.getDatabase("rig_witsml");
-                MongoCollection collection = database.getCollection("well");
-                BasicDBObject searchQuery = new BasicDBObject().append("flag", 0);
-                BasicDBObject searchQuery1 = new BasicDBObject().append("flag", 2);
-                count = collection.count(searchQuery);
-                count1 = collection.count(searchQuery1);
-                total = collection.count();
-                
-        %>
+
 <div id="StageGate">    
-    <button type="button" class="btn btn-info btn-arrow-right" style="background-color:#1d79fd">File Available</button>
-    <button id="click" type="button" class="btn btn-info btn-arrow-right" onclick="goma()">Mnemonic analysis</button>
+    <button type="button" class="btn btn-info btn-arrow-right" onclick="back()">File Available</button>
+    <button id="click" type="button" class="btn btn-info btn-arrow-right" style="background-color:#1d79fd">Mnemonic analysis</button>
     <button type="button" class="btn btn-info btn-arrow-right">Unit Normalisation</button>
-    <button type="button" class="btn btn-info btn-arrow-right">Harmonic Minimization</button>
+    <button type="button" class="btn btn-info btn-arrow-right">HM</button>
     <button type="button" class="btn btn-info btn-arrow-right">Pattern Generation</button>
 </div>	
-    
-<!--Displaying Dynamic table rows selected-->
-<div class="row" style="padding-bottom:0px; margin-top:0px">
-    <div class="col-sm-2"></div>
-    <div class="col-sm-2" style="color:#01579b"><%out.println(count);%>/ <%out.print(total);%></div>
-    <div class="col-sm-1" style="padding-left:50px; color:#01579b"><%out.println(count1);%>/ <%out.print(total);%></div>
-    <div class="col-sm-2" style="padding-left:90px; color:#01579b">0 / 0</div>
-    <div class="col-sm-2" style="padding-left:40px; color:#01579b">0 / 0</div>
-    <div class="col-sm-2" style="color:#01579b">0 / 0</div>
-    <div class="col-sm-1"></div>
-</div>    
-	<form method="post" action="stage3.jsp">
-        <div class="row" style="margin-bottom:0px">
+	
+        <div class="row">
           
             <div class="col-sm-4"></div>
             <div class="col-sm-4">
-                <p id="demo" style="padding-top:12px; font-size:11px"></p>
+                <p id="demo" style="padding-top:25px"></p>
             </div>
             
             <div class="col-sm-4"> 
@@ -321,25 +305,24 @@ body
 			<li><a href="#" onClick="sizeSelect20()">20</a></li>
 			<li><a href="#" onClick="sizeSelect10()">10</a></li>
                     </ul>
-                    
-                    <INPUT id="promotebtn" TYPE=submit name=submit Value="Promote">	
-                    <button type="button" class="btn-sm btn-primary">Demote</button>
+                     
+                    <button type="button" class="btn-sm btn-primary"  onclick="gotoUN()">Promote</button>
+                    <button type="button" class="btn-sm btn-primary" onclick="gotoIndex()">Demote</button>
                     <button type="button" class="btn-sm btn-primary glyphicon glyphicon-refresh" onClick="window.location.reload();"></button>   
-                    <button type="button" class="btn-sm btn-primary" onclick="displayall()">View All</button>					
-					
+                    <button type="button" class="btn-sm btn-primary" onclick="displayall()">DISPLAY ALL</button>					
                  </div>       
 	</div>
 </div>
 </div>
-      
-        <div class="row" id="table" style="margin-top:0px; padding-top:10px">
+    
+        <div class="row" id="table">
     	<div class="col-sm-2">
         	<div class="nav-side-menu">
             
             	<div class="menu-list">
                 	<ul id="menu-content" class="menu-content collapse in">
                     	<li  data-toggle="collapse" data-target="#products" class="collapsed active">
-                  			<a href="#"><i class="glyphicon glyphicon-chevron-right"></i> Dashboard</a>
+                  			<a href="#"><i class="glyphicon glyphicon-chevron-right"></i> DASHBOARD</a>
                 		</li>
                         	<ul class="sub-menu collapse" id="products">
                                     <li><a href="#"></a></li>
@@ -361,68 +344,35 @@ body
                 </div>
             </div>
         </div>
+        
+            <!-- Jsp MongoDB code -->
         <%
-           FindIterable<Document> mydatabaserecords = database.getCollection("well").find();
-            MongoCursor<Document> iterator = mydatabaserecords.iterator();
-           
-       %>
-        
-        
-        <div class="col-sm-10" style="margin-top:0px; padding-top:0px">
-        <table class="table table-striped table-bordered table-condensed" style="margin-top:0px; font-size:11px">
-            <tr class="info">
-                <th><input type="checkbox" onClick="toggle(this)"></input></th>
-                <th><a href="#">Well Name</a></th>
-                <th>Country</th>
-                <th>State</th>
-                <th>Operator</th>
-                <th>Region</th>
-                <th>Status</th>
-                <th>Purpose</th>
-            </tr>
+
+      
+            String[] selectedNames = request.getParameterValues("values");
+
+            if(request.getParameter("values")!=null){%>
             
-        <%
-
-        while (iterator.hasNext()) {
-             Document docs = iterator.next();
-            String country = docs.getString("country");
-            String state = docs.getString("state");
-            String Operator = docs.getString("operator");
-            String name = docs.getString("nameWell");
-            String region = docs.getString("region");
-            String statusWell = docs.getString("statusWell");
-            String purposeWell = docs.getString("purposeWell");
-             Integer flag = docs.getInteger("flag");
-            if(flag == 0){
-        %>
-            <tr class = "default">
-                <td>  
-                    <input type="checkbox" name="values" value=<%=name%> />
-                 </td>
-                <td><% out.println(name);%></td>
-                <td><% out.println(country);%></td>
-                <td><% out.println(state);%></td>
-                <td><% out.println(Operator);%></td>
-                <td><% out.println(region);%></td>
-                <td><% out.println(statusWell);%></td>
-                <td><% out.println(purposeWell);%></td>
-            </tr> <%
-}
-    }
-%>
-         
-    
-            </table>
-        </div>
-    </div>
             <%
-}
-catch (Exception e1) {
-    // TODO Auto-generated catch block
-    e1.printStackTrace();
+            
+                MongoClient client = new MongoClient("localhost", 27017);
+		MongoDatabase database = client.getDatabase("rig_witsml");
+		MongoCollection collection = database.getCollection("well");
+                Document document = new Document();
+                BasicDBObject newDocument = new BasicDBObject();
+                newDocument.append("$set", new BasicDBObject().append("flag", 2));
+                FindIterable<Document> mydatabaserecords = database.getCollection("well").find();
+                MongoCursor<Document> iterator = mydatabaserecords.iterator();
+
+                for(int i=0;i<selectedNames.length;i++){
+                        BasicDBObject searchQuery = new BasicDBObject().append("nameWell", selectedNames[i]);
+                        collection.updateMany(searchQuery, newDocument);
+                }
+                response.sendRedirect("DisplayPromoted.jsp");
+                            }
+else{
+                response.sendRedirect("DisplayPromoted.jsp");
 }
 %>
-</form>	
-
 </body>
 </html>
