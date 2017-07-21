@@ -88,12 +88,10 @@
 		
     <form method="post">
 	<% 
-                              
             MongoClient mongoClient = new MongoClient();
             MongoDatabase database = mongoClient.getDatabase("rig_witsml");
             MongoCollection collection = database.getCollection("well");
-            DistinctIterable<String> documents = collection.distinct("field", String.class );
-                    
+            DistinctIterable<String> documents = collection.distinct("field", String.class).filter(eq("fieldchecked", "no"));                    
         %>
 		
         <div class="container-fluid">
@@ -133,7 +131,7 @@
                                            Document doc = welliterator.next();
                                            String wells = doc.getString("nameWell");
                                            String checked = doc.getString("fieldchecked");
-                                           if(checked.equals("yes") && wells !=null ){    
+                                           if(checked.equals("no") && wells !=null ){    
                                 %>	
                                         
                                             <ul style="list-style-type:none; color:#74bcd4">
@@ -169,12 +167,11 @@
                                       while (dataiterator.hasNext()) {
                                            Document newdoc = dataiterator.next();
                                            String hole = newdoc.getString("holeSize");
-                                           String key = newdoc.getString("keyData");
-                                           String wchecked = newdoc.getString("wellchecked");
-                                           if(wchecked.equals("yes") && hole != null){ %>   
+                                           String wchecked = newdoc.getString("holeSelected");
+                                           if(wchecked.equals("no") && hole != null){ %>   
                                 	
                                             <ul style="list-style-type:none; color:#74bcd4">
-                                                <li style="font-size:13px"><input type="checkbox" name="holes" value="<%=key%>"> <% out.println(hole); %></li>
+                                                <li style="font-size:13px"><input type="checkbox" name="holes" value="<%=hole%>"> <% out.println(hole); %></li>
                                             </ul>
                                              <% 
                                                     }  
@@ -187,31 +184,97 @@ catch(Exception e){
 				</div>
 				</div>
                 </div> 
+                                                
+                       
 
             </div>
             
             <div class="col-md-3" style="width:40px">
-                 <ul style="list-style-type:none; margin-top:140px; padding-left:1px; padding-right:5px">
+                <ul style="list-style-type:none; margin-top:140px; padding-left:1px; padding-right:5px">
                     <li><button class="btn btn-md btn-primary" style="margin-left:-13px"><span class="fa fa-angle-double-right"></span></button></li><br>
                     <li><button class="btn btn-md btn-primary" style="margin-left:-13px"><span class="fa fa-angle-double-left"></span></button></li>    
-                </ul>                   
+                </ul>
             </div>
             
             <div class="col-md-3" style="width:422px">
                 <div class="panel panel-default">
                     <div class="panel-heading" style="background-color:#1794bf">
                         <h4 class="panel-title">
-                            <a data-toggle="collapse" href="#collapseinter" style="text-decoration:none; color:#f8f9f9; font-size:13px; font-family:Verdana;">Intermediate<span class="glyphicon glyphicon-plus-sign pull-right"></span></a>
+                            <a data-toggle="collapse" href="#collapseinter" style="text-decoration:none; color:#f8f9f9; font-size:13px; font-family:Verdana;">Intermediate<span class="glyphicon glyphicon-minus-sign pull-right"></span></a>
                         </h4>
                     </div>
-                    <div id="collapseinter" class="panel-collapse collapse">
-                        <div class="panel-body scrollable-menu scrollbar" id="ex4" style="height:400px; overflow-y:scroll">
-                            <ul style="list-style-type:none; color:#74bcd4">
-                                
+                    <div id="collapseinter" class="panel-collapse collapse in">
+                        <div class="panel-body scrollable-menu scrollbar" id="ex4" style="max-height:345px; overflow-y:scroll">
+                            <ul style="list-style-type:none; color:#74bcd4; padding-left:5px">
+                                    
+                                    <div class="panel-body" style="border-bottom:solid 1px #bababa">    
+                                        <p style="font-size:16px; font-weight:bold">Field Name :</p>
+                                         <%
+                                     DistinctIterable<String> fdocuments = collection.distinct("field", String.class).filter(eq("fieldchecked", "yes"));
+                                    for (String document : fdocuments) {
+                                %>
+                                    <li style="font-size:13px"><% out.println(document); %></li>
+                                <%} %>           
+                                    </div>
+                                    <div class="panel-body" style="border-bottom:solid 1px #bababa">
+                                        <p style="font-size:16px; font-weight:bold">Well Name :</p>
+                                            <%
+                                             try{
+                                                 FindIterable<Document> Thedatabaserecords = database.getCollection("well").find();
+                                     MongoCursor<Document> Welliterator = Thedatabaserecords.iterator();
+                                      while (Welliterator.hasNext()) {
+                                           Document doc = Welliterator.next();
+                                           String wells = doc.getString("uidWell");
+                                           String checked = doc.getString("wellischecked");
+                                           if(checked.equals("yes") && wells !=null ){    
+                                %>	
+                                        
+                                           
+                                <p style="font-size:13px"><% out.println(wells); %></p></<br>
+                                           
+                                             <% 
+                                                    }  
+                                                }
+}
+catch(Exception e){
+
+}
+                                                    %>
+                                    </div>    
+                                    <div class="panel-body">    
+                                        <p style="font-size:16px; font-weight:bold">Hole Size :</p>
+                                          <%
+                                             try{
+                                                 FindIterable<Document> Ddatabaserecords = database.getCollection("data").find();
+                                     MongoCursor<Document> Dataiterator = Ddatabaserecords.iterator();
+                                      while (Dataiterator.hasNext()) {
+                                           Document doc = Dataiterator.next();
+                                           String holes = doc.getString("holeSize");
+                                           String checked = doc.getString("holeSelected");
+                                           if(checked.equals("yes") && holes !=null ){    
+                                %>	
+                                        
+                                           
+                                <p style="font-size:13px"><% out.println(holes); %></p></<br>
+                                           
+                                             <% 
+                                                    }  
+                                                }
+}
+catch(Exception e){
+
+}
+                                                    %>
+                                        
+                                    </div>    
+                                        
+                                   
                             </ul>
                         </div>
                     </div>
+    
                 </div>
+     
             </div>
             
             <div class="col-md-1" style=" width:30px">
@@ -219,7 +282,7 @@ catch(Exception e){
                     <li><button class="btn btn-md btn-primary" formaction="mnemonicsupdate.jsp" style="margin-left:-19px"><span class="fa fa-angle-double-right"></span></button></li>
                 </ul>    
             </div>
-                                
+
             <div class="col-md-3">
                 <div class="panel panel-default" style="width:422px">
                     <div class="panel-heading" style="background-color:#1794bf">
@@ -236,11 +299,13 @@ catch(Exception e){
                     </div>
                 </div>
             </div>
+            
+            </div>
         </div>
+    
         <div class="row">
             <div class="col-md-4">
-                <div class="btn center-block"> 
-                    <button type="submit" class="btn btn-sm btn-primary" formaction="Panelupdate.jsp">Next</button>
+                <div class="btn center-block">                           
                     <button type="submit" class="btn btn-sm btn-primary glyphicon glyphicon-refresh" formaction="refresh.jsp"></button>                    
                 </div>
             </div>
@@ -253,12 +318,13 @@ catch(Exception e){
             
             <div class="col-md-4"></div>
         </div> 
-              
-        <div class="footer navbar-fixed-bottom" style="background-color:#ececec; box-shadow:0 0 30px 0 #7e7e7e; margin-bottom:1px; height:40px">
-            <a style="font-size:15px; font-family:Verdana; color:#595959"><center style="padding-top:10px">Copyright &copy 2017</center></a>
-        </div>                         
-    </div>
-        
+    <div class="footer navbar-fixed-bottom" style="background-color:#ececec; box-shadow:0 0 30px 0 #7e7e7e; margin-bottom:1px; height:40px">
+        <a style="font-size:15px; font-family:Verdana; color:#595959"><center style="padding-top:10px">Copyright &copy 2017</center></a>
+    </div>                                                                                                
+          
+ </div>    
+   
+                                              
 </form>
         
 </body>

@@ -21,7 +21,7 @@ import com.mongodb.client.result.UpdateResult;
 import java.util.ArrayList;
 import java.util.List;
 
-public final class main_0020pattern_jsp extends org.apache.jasper.runtime.HttpJspBase
+public final class holesincluded_jsp extends org.apache.jasper.runtime.HttpJspBase
     implements org.apache.jasper.runtime.JspSourceDependent {
 
   private static final JspFactory _jspxFactory = JspFactory.getDefaultFactory();
@@ -81,15 +81,14 @@ public final class main_0020pattern_jsp extends org.apache.jasper.runtime.HttpJs
       out.write("<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\" />\n");
       out.write("<title>index</title>\n");
       out.write("\n");
-      out.write("<meta charset=\"utf-8\">\n");
+      out.write("  <meta charset=\"utf-8\">\n");
       out.write("  <link rel=\"stylesheet\" href=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css\">\n");
       out.write("  <script src=\"https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js\"></script>\n");
       out.write("  <script src=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js\"></script>\n");
       out.write("  <link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css\">\n");
       out.write("\n");
-      out.write("\n");
       out.write("<style>\n");
-      out.write("\t\n");
+      out.write("    \n");
       out.write("    #font{font-family:Verdana; border-bottom:solid 2px #f0f3f4}\n");
       out.write("    #font:hover {color:#1794bf; border-bottom:solid 2px #1794bf}\n");
       out.write("    #fontDropdown:hover{font-family:Verdana; color:#ecf0f1; background-color:#707b7c; -webkit-transition-duration:0.4s}\n");
@@ -106,14 +105,14 @@ public final class main_0020pattern_jsp extends org.apache.jasper.runtime.HttpJs
       out.write("    #ex4::-webkit-scrollbar-thumb { background-color:#abb2b9; border-radius:10px; }\n");
       out.write("    #ex4::-webkit-scrollbar-thumb:hover { background-color:#aeb6bf; border:1px solid #808b96; }\n");
       out.write("    #ex4::-webkit-scrollbar-thumb:active { background-color:#aeb6bf; border:1px solid #808b96; }\n");
-      out.write("\n");
-      out.write("</style>\n");
-      out.write("\n");
+      out.write("    \n");
+      out.write("</style>\t\n");
+      out.write("\t\n");
       out.write("</head>\n");
       out.write("\n");
       out.write("<body class=\"scrollbar\" id=\"ex4\">\n");
       out.write("  \n");
-      out.write("    <div class=\"row\">\n");
+      out.write("<div class=\"row\">\n");
       out.write("    \t<div class=\"col-md-12\">\n");
       out.write("            <nav class=\"navbar navbar-default\" style=\"background-color:#ececec; box-shadow:0 0 30px 0 #727272; height:75px\">\n");
       out.write("                <div class=\"container\" style=\"margin-top:-5px;\">\n");
@@ -144,17 +143,17 @@ public final class main_0020pattern_jsp extends org.apache.jasper.runtime.HttpJs
       out.write("                </div>\n");
       out.write("            </nav>\n");
       out.write("        </div>            \n");
-      out.write("    </div>\n");
+      out.write("    </div>  \n");
+      out.write("\n");
       out.write("\t\t\n");
-      out.write("            <form method=\"post\">\n");
-      out.write("\t\t");
+      out.write("    <form method=\"post\">\n");
+      out.write("\t");
  
-            
-                    
-                MongoClient mongoClient = new MongoClient();
-                MongoDatabase database = mongoClient.getDatabase("rig_witsml");
-                MongoCollection collection = database.getCollection("well");
-              DistinctIterable<String> documents = collection.distinct("field", String.class );
+                              
+            MongoClient mongoClient = new MongoClient();
+            MongoDatabase database = mongoClient.getDatabase("rig_witsml");
+            MongoCollection collection = database.getCollection("well");
+            DistinctIterable<String> documents = collection.distinct("field", String.class );
                     
         
       out.write("\n");
@@ -162,7 +161,7 @@ public final class main_0020pattern_jsp extends org.apache.jasper.runtime.HttpJs
       out.write("        <div class=\"container-fluid\">\n");
       out.write("        <div class=\"row\">\n");
       out.write("            <div class=\"col-md-4\" style=\"width:418px\">\n");
-      out.write("                <div class=\"panel panel-default\" >\n");
+      out.write("                <div class=\"panel panel-default\">\n");
       out.write("                    <div class=\"panel-heading\" style=\"background-color:#1794bf\">\n");
       out.write("                        <h4 class=\"panel-title\">\n");
       out.write("                            <a data-toggle=\"collapse\" href=\"#collapse1\" style=\"text-decoration:none; color:#f8f9f9; font-size:13px; font-family:Verdana;\">Fields<span class=\"glyphicon glyphicon-chevron-down pull-right\"></span></a>\n");
@@ -171,53 +170,107 @@ public final class main_0020pattern_jsp extends org.apache.jasper.runtime.HttpJs
       out.write("                    <div id=\"collapse1\" class=\"panel-collapse collapse in\">\n");
       out.write("                        <div class=\"panel-body scrollable-menu scrollbar\" id=\"ex4\" style=\"max-height:120px\">\n");
       out.write("                            <ul style=\"list-style-type:none; color:#74bcd4\">\n");
-      out.write("                                               ");
+      out.write("\t\t\t\t");
 
-                                                    for (String document : documents) {
-                                                
+                                    for (String document : documents) {
+                                
       out.write("\n");
-      out.write("                                                        <li style=\"font-size:13px\"><input type=\"checkbox\" name=\"field\" value=\"");
-      out.print(document);
-      out.write("\"> ");
+      out.write("                                    <li style=\"font-size:13px\"><input type=\"checkbox\"> ");
  out.println(document); 
       out.write("</li>\n");
-      out.write("                                                        ");
+      out.write("                                ");
 } 
       out.write("\n");
-      out.write("                            </ul>\n");
-      out.write("                        </div>\n");
+      out.write("\t\t\t</ul>\n");
+      out.write("\t\t\t</div>\n");
       out.write("                    </div>\n");
-      out.write("                \n");
-      out.write("\n");
-      out.write("                \n");
+      out.write("                                               \n");
       out.write("                    <div class=\"panel-heading\" style=\"background-color:#1794bf\">\n");
       out.write("                        <h4 class=\"panel-title\">\n");
       out.write("                            <a data-toggle=\"collapse\" href=\"#collapse2\" style=\"text-decoration:none; color:#f8f9f9; font-size:13px; font-family:Verdana;\">Wells<span class=\"glyphicon glyphicon-chevron-down pull-right\"></span></a>\n");
       out.write("                        </h4>\n");
       out.write("                    </div>\n");
-      out.write("                    <div id=\"collapse2\" class=\"panel-collapse collapse in\">\n");
-      out.write("                        <div class=\"panel-body scrollable-menu scrollbar\" id=\"ex4\" style=\"max-height:120px; overflow-y:scroll\">\n");
-      out.write("                            <ul style=\"list-style-type:none; color:#74bcd4\">\n");
-      out.write("                                \n");
-      out.write("                            </ul>\n");
-      out.write("                        </div>\n");
-      out.write("                    </div>\n");
-      out.write("               \n");
+      out.write("                               \n");
+      out.write("\t\t\t<div id=\"collapse2\" class=\"panel-collapse collapse in\">\n");
+      out.write("\t\t\t<div class=\"panel-body scrollable-menu scrollbar\" id=\"ex4\" style=\"max-height:120px; overflow-y:scroll\">\n");
+      out.write("                                ");
+
+                                             try{
+                                     FindIterable<Document> thedatabaserecords = database.getCollection("well").find();
+                                     MongoCursor<Document> welliterator = thedatabaserecords.iterator();
+                                      while (welliterator.hasNext()) {
+                                           Document doc = welliterator.next();
+                                           String wells = doc.getString("nameWell");
+                                           String checked = doc.getString("fieldchecked");
+                                           if(checked.equals("yes") && wells !=null ){    
+                                
+      out.write("\t\n");
+      out.write("                                        \n");
+      out.write("                                            <ul style=\"list-style-type:none; color:#74bcd4\">\n");
+      out.write("                                                <li style=\"font-size:13px\"><input type=\"checkbox\" name=\"welllist\" value=\"");
+      out.print(wells);
+      out.write("\"> ");
+ out.println(wells); 
+      out.write("</li>\n");
+      out.write("                                            </ul>\n");
+      out.write("                                            \n");
+      out.write("                                                ");
+
+                                                    }  
+                                                }
+                    }
+                        catch(Exception e){
+
+}
+                                                    
       out.write("\n");
-      out.write("               \n");
-      out.write("                    <div class=\"panel-heading\" style=\"background-color:#1794bf\">\n");
-      out.write("                        <h4 class=\"panel-title\">\n");
-      out.write("                            <a data-toggle=\"collapse\" href=\"#collapse3\" style=\"text-decoration:none; color:#f8f9f9; font-size:13px; font-family:Verdana;\">Hole Size<span class=\"glyphicon glyphicon-chevron-down pull-right\"></span></a>\n");
-      out.write("                        </h4>\n");
-      out.write("                    </div>\n");
-      out.write("                    <div id=\"collapse3\" class=\"panel-collapse collapse in\">\n");
-      out.write("                        <div class=\"panel-body scrollable-menu scrollbar\" id=\"ex4\" style=\"max-height:120px; overflow-y:scroll\">\n");
-      out.write("                            <ul style=\"list-style-type:none; color:#74bcd4\">\n");
-      out.write("                                \n");
-      out.write("                            </ul>\n");
-      out.write("                        </div>\n");
-      out.write("                    </div>\n");
-      out.write("                </div>\n");
+      out.write("\t\t\t\t\t</div>\n");
+      out.write("\t\t\t\t\t\n");
+      out.write("\t\t\t\t</div>\n");
+      out.write("\t\t\t\n");
+      out.write("\n");
+      out.write("\t\t\t\n");
+      out.write("\t\t                <div class=\"panel-heading\" style=\"background-color:#1794bf\">\n");
+      out.write("                                    <h4 class=\"panel-title\">\n");
+      out.write("                                        <a data-toggle=\"collapse\" href=\"#collapse3\" style=\"text-decoration:none; color:#f8f9f9; font-size:13px; font-family:Verdana;\">Hole Size<span class=\"glyphicon glyphicon-chevron-down pull-right\"></span></a>\n");
+      out.write("                                    </h4>\n");
+      out.write("                                </div>\n");
+      out.write("\t\t\t\t\n");
+      out.write("                                <div id=\"collapse3\" class=\"panel-collapse collapse in\">\n");
+      out.write("                                <div class=\"panel-body scrollable-menu scrollbar\" id=\"ex4\" style=\"max-height:120px; overflow-y:scroll\">\n");
+      out.write("                                            ");
+
+                                                try{
+                                     FindIterable<Document> databaserecords = database.getCollection("data").find();
+                                     MongoCursor<Document> dataiterator = databaserecords.iterator();
+                                      while (dataiterator.hasNext()) {
+                                           Document newdoc = dataiterator.next();
+                                           String hole = newdoc.getString("holeSize");
+                                           String key = newdoc.getString("keyData");
+                                           String wchecked = newdoc.getString("wellchecked");
+                                           if(wchecked.equals("yes") && hole != null){ 
+      out.write("   \n");
+      out.write("                                \t\n");
+      out.write("                                            <ul style=\"list-style-type:none; color:#74bcd4\">\n");
+      out.write("                                                <li style=\"font-size:13px\"><input type=\"checkbox\" name=\"holes\" value=\"");
+      out.print(key);
+      out.write("\"> ");
+ out.println(hole); 
+      out.write("</li>\n");
+      out.write("                                            </ul>\n");
+      out.write("                                             ");
+ 
+                                                    }  
+                                                }
+}
+catch(Exception e){
+
+}
+                                                    
+      out.write("\n");
+      out.write("\t\t\t\t</div>\n");
+      out.write("\t\t\t\t</div>\n");
+      out.write("                </div> \n");
       out.write("\n");
       out.write("            </div>\n");
       out.write("            \n");
@@ -227,7 +280,7 @@ public final class main_0020pattern_jsp extends org.apache.jasper.runtime.HttpJs
       out.write("                    <li><button class=\"btn btn-md btn-primary\" style=\"margin-left:-13px\"><span class=\"fa fa-angle-double-left\"></span></button></li>    \n");
       out.write("                </ul>                   \n");
       out.write("            </div>\n");
-      out.write("                            \n");
+      out.write("            \n");
       out.write("            <div class=\"col-md-3\" style=\"width:422px\">\n");
       out.write("                <div class=\"panel panel-default\">\n");
       out.write("                    <div class=\"panel-heading\" style=\"background-color:#1794bf\">\n");
@@ -236,7 +289,7 @@ public final class main_0020pattern_jsp extends org.apache.jasper.runtime.HttpJs
       out.write("                        </h4>\n");
       out.write("                    </div>\n");
       out.write("                    <div id=\"collapseinter\" class=\"panel-collapse collapse\">\n");
-      out.write("                        <div class=\"panel-body scrollable-menu scrollbar\" id=\"ex4\" style=\"height:580px; overflow-y:scroll\">\n");
+      out.write("                        <div class=\"panel-body scrollable-menu scrollbar\" id=\"ex4\" style=\"height:400px; overflow-y:scroll\">\n");
       out.write("                            <ul style=\"list-style-type:none; color:#74bcd4\">\n");
       out.write("                                \n");
       out.write("                            </ul>\n");
@@ -250,7 +303,7 @@ public final class main_0020pattern_jsp extends org.apache.jasper.runtime.HttpJs
       out.write("                    <li><button class=\"btn btn-md btn-primary\" formaction=\"mnemonicsupdate.jsp\" style=\"margin-left:-19px\"><span class=\"fa fa-angle-double-right\"></span></button></li>\n");
       out.write("                </ul>    \n");
       out.write("            </div>\n");
-      out.write("\n");
+      out.write("                                \n");
       out.write("            <div class=\"col-md-3\">\n");
       out.write("                <div class=\"panel panel-default\" style=\"width:422px\">\n");
       out.write("                    <div class=\"panel-heading\" style=\"background-color:#1794bf\">\n");
@@ -268,11 +321,10 @@ public final class main_0020pattern_jsp extends org.apache.jasper.runtime.HttpJs
       out.write("                </div>\n");
       out.write("            </div>\n");
       out.write("        </div>\n");
-      out.write("                     \n");
       out.write("        <div class=\"row\">\n");
       out.write("            <div class=\"col-md-4\">\n");
       out.write("                <div class=\"btn center-block\"> \n");
-      out.write("                    <button type=\"submit\" class=\"btn btn-sm btn-primary\" formaction=\"fieldupdate.jsp\">Next</button>\n");
+      out.write("                    <button type=\"submit\" class=\"btn btn-sm btn-primary\" formaction=\"Panelupdate.jsp\">Next</button>\n");
       out.write("                    <button type=\"submit\" class=\"btn btn-sm btn-primary glyphicon glyphicon-refresh\" formaction=\"refresh.jsp\"></button>                    \n");
       out.write("                </div>\n");
       out.write("            </div>\n");
@@ -285,12 +337,11 @@ public final class main_0020pattern_jsp extends org.apache.jasper.runtime.HttpJs
       out.write("            \n");
       out.write("            <div class=\"col-md-4\"></div>\n");
       out.write("        </div> \n");
-      out.write("    </div>    \n");
-      out.write("\n");
-      out.write("    <div class=\"footer navbar-fixed-bottom\" style=\"background-color:#ececec; box-shadow:0 0 30px 0 #7e7e7e; margin-bottom:1px; height:40px\">\n");
+      out.write("              \n");
+      out.write("        <div class=\"footer navbar-fixed-bottom\" style=\"background-color:#ececec; box-shadow:0 0 30px 0 #7e7e7e; margin-bottom:1px; height:40px\">\n");
       out.write("            <a style=\"font-size:15px; font-family:Verdana; color:#595959\"><center style=\"padding-top:10px\">Copyright &copy 2017</center></a>\n");
-      out.write("    </div>                         \n");
-      out.write("</div> \n");
+      out.write("        </div>                         \n");
+      out.write("    </div>\n");
       out.write("        \n");
       out.write("</form>\n");
       out.write("        \n");

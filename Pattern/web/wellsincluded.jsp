@@ -15,6 +15,7 @@
 <%@page import="com.mongodb.client.result.UpdateResult"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.List"%>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -22,235 +23,108 @@
 <title>index</title>
 
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  <link rel="stylesheet/less" href="less/sidebar.less">
-  <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-	<style>
-            *{margin:0px}
-                    
-                    
-			
-	/*navigation*/		
-.nav-side-menu 
-{
-  padding-top:25px;	
-  overflow: auto;
-  font-family: verdana;
-  font-size: 12px;
-  font-weight: 200;
-  background-color: #85c1e9;
-  position: fixed;
-  top: 0px;
-  width:233px;
-  height: 100%;
-  color: #e1fff5;
-}
-
-
-.nav-side-menu ul,.nav-side-menu li 
-{
-  list-style: none;
-  padding: 0px;
-  margin-left: 0px;
-  line-height: 35px;
-  cursor: pointer;
-}
-
-.nav-side-menu ul .active,.nav-side-menu li .active 
-{
-  border-left: 3px solid #d19b3d;
-  background-color: #57afc0;
-  padding-left:15px;
-}
-
-.nav-side-menu ul .sub-menu li.active,
-.nav-side-menu li .sub-menu li.active 
-{
-  color: #d19b3d;
-  padding-left:15px;
-}
-
-.nav-side-menu ul .sub-menu li,.nav-side-menu li .sub-menu li 
-{
-  background-color: #2874a6;
-  border: none;
-  line-height: 28px;
-  border-bottom: 1px solid #23282e;
-  margin-left: 0px;
-}
-
-.nav-side-menu ul .sub-menu li:hover,.nav-side-menu li .sub-menu li:hover 
-{
-  background-color: #71b2dc;
-}
-
-.nav-side-menu li 
-{
-  padding-left: 20px;
-  border-left: 3px solid #2e353d;
-  border-bottom: 1px solid #23282e;
-}
-
-.nav-side-menu li a 
-{
-  text-decoration: none;
-  color: #e1ffff;
-}
-
-.nav-side-menu li a i 
-{
-  padding-left: 10px;
-  width: 20px;
-  padding-right: 20px;
-}
-
-.nav-side-menu li:hover 
-{
-  border-left: 3px solid #d19b3d;
-  background-color: #4f5b69;
-  -webkit-transition: all 1s ease;
-}
-@media (max-width: 767px) 
-{
-  .nav-side-menu 
-  {
-    position: relative;
-    width: 100%;
-    margin-bottom: 10px;
-  }
-  .nav-side-menu .toggle-btn {
-    display: block;
-    cursor: pointer;
-    position: absolute;
-    right: 10px;
-    top: 10px;
-    z-index: 10 !important;
-    padding: 3px;
-    background-color: #ffffff;
-    color: #000;
-    width: 40px;
-    text-align: center;
-  }
-}
-
-@media (min-width: 767px) 
-{
-  .nav-side-menu .menu-list .menu-content 
-  {
-    display: block;
-  }
-}
-
-body 
-{
-  margin: 0px;
-  padding: 0px;
-}
-
-#promotebtn{width:70px; height:32px; border-radius:3px; background-color:#1c79af; color:white; border-left-color:#2474a6; border-top-color:#2474a6; border-right-color:black; border-bottom-color:black}
-#navHeading{padding-left:10px; padding-bottom:4px; font-family:verdana; font-size:26px}
-#navHeading a{text-decoration:none}
-body {background-color:#ebebeb}
-#navlist li{display:inline}
-	
-</style>
-
+<style>
     
-	
+    #font{font-family:Verdana; border-bottom:solid 2px #f0f3f4}
+    #font:hover {color:#1794bf; border-bottom:solid 2px #1794bf}
+    #fontDropdown:hover{font-family:Verdana; color:#ecf0f1; background-color:#707b7c; -webkit-transition-duration:0.4s}
+    body{overflow-y:scroll; overflow-x:hidden; background-color:#d0d3d4;}
+
+    .scrollbar{ 
+        max-height: 200px;
+        overflow-x:hidden;
+        overflow-y:scroll; 
+        min-width: 135px;
+                }
+    
+    #ex4::-webkit-scrollbar { width:8px;background-color:white; } 
+    #ex4::-webkit-scrollbar-thumb { background-color:#abb2b9; border-radius:10px; }
+    #ex4::-webkit-scrollbar-thumb:hover { background-color:#aeb6bf; border:1px solid #808b96; }
+    #ex4::-webkit-scrollbar-thumb:active { background-color:#aeb6bf; border:1px solid #808b96; }
+    
+</style>	
 	
 </head>
 
-<body style="overflow:hidden">
+<body class="scrollbar" id="ex4">
   
-  
-		<div class="row">
-		
-			<div class="col-sm-2"></div>
-			
-			<div class="col-sm-10">
-				<div class="text">
-					<ul class="breadcrumb" style="background-color:#ebebeb">
-						<li><a href="#"><span style="font-size:15px">Container</span></a></li>
-						<li><a href="#"><span style="font-size:15px">Result</span></a></li>
-					</ul>
-				</div>
-			</div>
-		</div>
-  
-	<div class="row" style="margin-top:0px; padding-top:0px">
-            <div class="col-sm-2" style="background-color:red">
-        	<div class="nav-side-menu left-nav">
-                    <div class="menu-list">
-                	<p id="navHeading"><a href="#"> Dashboard</a></p>
-                            
-                                <ul id="menu-content" class="menu-content collapse in">
-                                    
-                                    <li  data-toggle="collapse" data-target="#products" class="collapsed active">
-                                        <a href="#"> Dashboard</a>
-                                    </li>
-                                    
-                                    <li  data-toggle="collapse" data-target="#products" class="collapsed active">
-                                        <a href="#"> Patterns</a>
-                                    </li>
-                                    
-					<!--<li data-toggle="collapse" data-target="#service" class="collapsed">
-					<a href="#"><i class="glyphicon glyphicon-chevron-right"></i>Button</a>
-					</li>  
-
-					<ul class="sub-menu collapse" id="service">
-					<li><a href="#"></a></li>
-					<li><a href="#"></a></li>
-					</ul>
-					-->
-				</ul>
+<div class="row">
+    	<div class="col-md-12">
+            <nav class="navbar navbar-default" style="background-color:#ececec; box-shadow:0 0 30px 0 #727272; height:75px">
+                <div class="container" style="margin-top:-5px;">
+                    <div class="navbar-header">
+                        <a class="navbar-brand" href="#" style="font-size:25px; font-family:Verdana; color:#1794bf"><span class="glyphicon glyphicon-home" style="font-size:20px; margin-right:20px"></span>Drilling Analytics</a>
                     </div>
                 </div>
-            </div>
+                <div>
+                    <ul class="nav navbar-nav" style="font-size:15px; margin-left:132px; margin-top:-15px">
+                        <li id="font">
+                            <a href="#" style="height:42px">
+                                <i class="fa fa-bar-chart"></i>
+                                <span> Dashboard</span>
+                            </a>
+                        </li>
+                        <li id="font" class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#" style="height:42px; background-color:transparent"><i class="fa fa-line-chart"></i>
+                                <span> Patterns</span>
+                                <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu" style="font-size:13px">
+                                <li><a id="fontDropdown" href="#">Container</a></li>
+                                <li><a id="fontDropdown" href="#">Result</a></li>
+                            </ul>
+                        </li> 
+                        <li><a href="#"></a></li>
+                    </ul>
+                </div>
+            </nav>
+        </div>            
+    </div>  
+
 		
-            <form method="post">
-		<% 
-            
-                    
-                MongoClient mongoClient = new MongoClient();
-                MongoDatabase database = mongoClient.getDatabase("rig_witsml");
-                MongoCollection collection = database.getCollection("well");
-              DistinctIterable<String> documents = collection.distinct("field", String.class );
+    <form method="post">
+	<% 
+                              
+            MongoClient mongoClient = new MongoClient();
+            MongoDatabase database = mongoClient.getDatabase("rig_witsml");
+            MongoCollection collection = database.getCollection("well");
+            DistinctIterable<String> documents = collection.distinct("field", String.class );
                     
         %>
 		
-		<div class="col-sm-4" style="padding-left:25px; padding-right:25px">
-			<div class="panel panel-default">
-			
-				<div class="panel-heading">
-					<h4 class="panel-title">
-						<a data-toggle="collapse" href="#collapse1" style="text-decoration:none; color:#3d82b8; font-size:13px">Fields<span class="glyphicon glyphicon-plus-sign" style="padding-left:318px"></span></a>
-					</h4>
-				</div>
-				<div id="collapse1" class="panel-collapse collapse in">
-					<div class="panel-body" style="max-height:200px; overflow-y:scroll">
-                                            <ul style="list-style-type:none; color:#74bcd4">
-						<%
-                                                    for (String document : documents) {
-                                                        %>
-                                                        <li><input type="checkbox"> <% out.println(document); %></li>
-                                                        <%} %>
-						</ul>
-					</div>
-				</div>
+        <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-4" style="width:418px">
+                <div class="panel panel-default">
+                    <div class="panel-heading" style="background-color:#1794bf">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" href="#collapse1" style="text-decoration:none; color:#f8f9f9; font-size:13px; font-family:Verdana;">Fields<span class="glyphicon glyphicon-chevron-down pull-right"></span></a>
+                        </h4>
+                    </div>
+                    <div id="collapse1" class="panel-collapse collapse in">
+                        <div class="panel-body scrollable-menu scrollbar" id="ex4" style="max-height:120px">
+                            <ul style="list-style-type:none; color:#74bcd4">
+				<%
+                                    for (String document : documents) {
+                                %>
+                                    <li style="font-size:13px"><input type="checkbox"> <% out.println(document); %></li>
+                                <%} %>
+			</ul>
+			</div>
+                    </div>
                                                
-				<div class="panel-heading">
-					<h4 class="panel-title">
-						<a data-toggle="collapse" href="#collapse2" style="text-decoration:none; color:#3d82b8; font-size:13px">Wells<span class="glyphicon glyphicon-plus-sign" style="padding-left:321px"></span></a>
-					</h4>
-				</div>
-                               
-				<div id="collapse2" class="panel-collapse collapse in">
-					<div class="panel-body" style="max-height:200px; overflow-y:scroll">
-					 <%
+                    <div class="panel-heading" style="background-color:#1794bf">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" href="#collapse2" style="text-decoration:none; color:#f8f9f9; font-size:13px; font-family:Verdana;">Wells<span class="glyphicon glyphicon-chevron-down pull-right"></span></a>
+                        </h4>
+                    </div>
+                    <div id="collapse2" class="panel-collapse collapse in">
+                                <%
                                      FindIterable<Document> mydatabaserecords = database.getCollection("well").find();
                                      MongoCursor<Document> iterator = mydatabaserecords.iterator();
                                       while (iterator.hasNext()) {
@@ -259,9 +133,9 @@ body {background-color:#ebebeb}
                                            String checked = doc.getString("fieldchecked");
                                            if(checked.equals("yes")){    
                                 %>	
-                                        <div>
+                                        <div class="panel-body scrollable-menu scrollbar" id="ex4" style="max-height:120px; overflow-y:scroll">
                                             <ul style="list-style-type:none; color:#74bcd4">
-                                                <li><input type="checkbox" name="welllist" value="<%=well%>"> <% out.println(well); %></li>
+                                                <li style="font-size:13px"><input type="checkbox" name="welllist" value="<%=well%>"> <% out.println(well); %></li>
                                             </ul>
                                         </div>    
                                                 <%
@@ -270,67 +144,93 @@ body {background-color:#ebebeb}
                                                     %>
 					</div>
 					
-				</div>
+				
 			
-
-			
-				<div class="panel-heading">
-					<h4 class="panel-title">
-						<a data-toggle="collapse" href="#collapse3" style="text-decoration:none; color:#3d82b8; font-size:13px">Hole Size<span class="glyphicon glyphicon-plus-sign" style="padding-left:297px"></span></a>
-					</h4>
-				</div>
-				<div id="collapse3" class="panel-collapse collapse">
-					<div class="panel-body" style="max-height:200px; overflow-y:scroll">
-						<ul></ul>
-					</div>
-				</div>
-                        </div> 
-                                                
-                        <div class="btn center-block">                           
-                        <button type="submit" class="btn btn-sm btn-primary" formaction="wellupdate.jsp" >Update</button>
-                        <button type="submit" class="btn btn-sm btn-primary glyphicon glyphicon-refresh" formaction="refresh.jsp"></button>                    </div> 
-                                        
-                </div>
-                                    
-               
-		
-		
-		<div class="col-sm-5" style="padding-left:0px">
-			<div class="panel panel-default" style="max-height:300px; background-color:#f4f4f5; overflow-y:scroll">
-                            <div class="panel" style="max-height:100px; overflow-y:scroll; background-color:#f8f8f9">
-                                <h3 class="text"><small style="color:#3d82b8; padding-left:15px; font-size:13px">Field Name</small></h3>
-                                    <ul id="navlist" style="color:#74bcd4">
-                                        
-                                    </ul>
-                            </div>
-                            
-                            <div class="panel" style="max-height:100px; overflow-y:scroll; background-color:#f8f8f9">
-                                <h3 class="text"><small style="color:#3d82b8; padding-left:15px; font-size:13px">Well Name</small></h3>
-                                    <ul id="navlist" style="color:#74bcd4">
-                                        
-                                    </ul>
-                            </div>
-                            
-                            <div class="panel" style="max-height:100px; overflow-y:scroll; background-color:#f8f8f9">
-                                <h3 class="text"><small style="color:#3d82b8; padding-left:15px; font-size:13px">Hole Size</small></h3>
-                                    <ul id="navlist" style="color:#74bcd4">
-                                        
-                                    </ul>
-                            </div>
-			</div>
-			
-			<button type="button" class="btn btn-sm btn-primary center-block">Generate</button>
-                       
-                <div class="panel panel-default" style="max-height:300px; background-color:#f4f4f4f5; overflow-y:scroll; margin-top:19px">
-                    <div class="panel" style="max-height:100px; background-color:#f8f8f9">
-                        <h3 class="text"><small style="color:#3d82b8; padding-left:15px; font-size:13px">Mnemonic</small></h3>
-                            <ul id="navlist" style="color:#74bcd4">
-                                        
-                            </ul>
+                    <div class="panel-heading" style="background-color:#1794bf">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" href="#collapse3" style="text-decoration:none; color:#f8f9f9; font-size:13px; font-family:Verdana;">Hole Size<span class="glyphicon glyphicon-chevron-down pull-right"></span></a>
+                        </h4>
                     </div>
-                </div>                        
-        </div>                              
-    </div>  
+                    <div id="collapse3" class="panel-collapse collapse in">
+                        <div class="panel-body scrollable-menu scrollbar" id="ex4" style="max-height:120px; overflow-y:scroll">
+                            <ul style="list-style-type:none; color:#74bcd4">
+                                
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+            
+            <div class="col-md-3" style="width:40px">
+                 <ul style="list-style-type:none; margin-top:140px; padding-left:1px; padding-right:5px">
+                    <li><button class="btn btn-md btn-primary" style="margin-left:-13px"><span class="fa fa-angle-double-right"></span></button></li><br>
+                    <li><button class="btn btn-md btn-primary" style="margin-left:-13px"><span class="fa fa-angle-double-left"></span></button></li>    
+                </ul>                   
+            </div>
+                                        
+            <div class="col-md-3" style="width:422px">
+                <div class="panel panel-default">
+                    <div class="panel-heading" style="background-color:#1794bf">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" href="#collapseinter" style="text-decoration:none; color:#f8f9f9; font-size:13px; font-family:Verdana;">Intermediate<span class="glyphicon glyphicon-plus-sign pull-right"></span></a>
+                        </h4>
+                    </div>
+                    <div id="collapseinter" class="panel-collapse collapse">
+                        <div class="panel-body scrollable-menu scrollbar" id="ex4" style="height:400px; overflow-y:scroll">
+                            <ul style="list-style-type:none; color:#74bcd4">
+                                
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+             <div class="col-md-1" style=" width:30px">
+                <ul style="list-style-type:none; margin-top:160px; padding-left:1px; padding-right:5px">
+                    <li><button class="btn btn-md btn-primary" formaction="mnemonicsupdate.jsp" style="margin-left:-19px"><span class="fa fa-angle-double-right"></span></button></li>
+                </ul>    
+            </div>
+
+            <div class="col-md-3">
+                <div class="panel panel-default" style="width:422px">
+                    <div class="panel-heading" style="background-color:#1794bf">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" href="#mnemonicsCollapse" style="text-decoration:none; color:#f8f9f9; font-size:13px; font-family:Verdana;">Mnemonics<span class="glyphicon glyphicon-plus-sign pull-right"></span></a>
+                        </h4>
+                    </div>
+                    <div id="mnemonicsCollapse" class="panel-collapse collapse">
+                        <div class="panel-body scrollable-menu scrollbar" id="ex4" style="max-height:200px; overflow-y:scroll">
+                            <ul style="list-style-type:none; color:#74bcd4">
+                                
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>                                
+        <div class="row">
+            <div class="col-md-4">
+                <div class="btn center-block"> 
+                    <button type="submit" class="btn btn-sm btn-primary" formaction="wellupdate.jsp">Next</button>
+                    <button type="submit" class="btn btn-sm btn-primary glyphicon glyphicon-refresh" formaction="refresh.jsp"></button>                    
+                </div>
+            </div>
+            
+            <div class="col-md-4">
+                <div class="col-sm-12">
+                    <center><button class="btn btn-sm btn-primary" disabled="disabled" style="margin-top:8px">Generate</button></center>
+                </div>
+            </div>
+            
+            <div class="col-md-4"></div>
+        </div> 
+        </div>
+    <div class="footer navbar-fixed-bottom" style="background-color:#ececec; box-shadow:0 0 30px 0 #7e7e7e; margin-bottom:1px; height:40px">
+            <a style="font-size:15px; font-family:Verdana; color:#595959"><center style="padding-top:10px">Copyright &copy 2017</center></a>
+    </div>                         
+</div>    
         
 </form>
         

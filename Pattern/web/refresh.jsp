@@ -28,7 +28,12 @@
                 newDoc.append("$set", new BasicDBObject().append("wellchecked", "no"));
                 FindIterable<Document> databaserecords = database.getCollection("data").find();
                  BasicDBObject searchQuery1 = new BasicDBObject().append("wellchecked", "yes");
+                 MongoCollection collection3 = database.getCollection("data");
+                 MongoCollection collection4 = database.getCollection("groupLog");
                  collection.updateMany(searchQuery, newDocument);
+                 collection.updateMany(eq("wellischecked", "yes"),new Document("$set", new BasicDBObject().append("wellischecked", "no")));
                  collection2.updateMany(searchQuery1, newDoc);
+                 collection3.updateMany(eq("holeSelected", "yes"),new Document("$set", new BasicDBObject().append("holeSelected", "no")));
+                 collection4.updateMany(eq("fieldischecked", "yes"),new Document("$set", new BasicDBObject().append("fieldischecked", "no")));
                 response.sendRedirect("main pattern.jsp");
 %>

@@ -17,27 +17,21 @@
 
       
             String[] selectedNames = request.getParameterValues("field");
-
-            if(request.getParameter("field")!=null){%>
-            
-            <%
-            
-                MongoClient client = new MongoClient("localhost", 27017);
-		MongoDatabase database = client.getDatabase("rig_witsml");
+            MongoClient client = new MongoClient("localhost", 27017);
+            MongoDatabase database = client.getDatabase("rig_witsml");
+            if(request.getParameter("field")!=null){
 		MongoCollection collection = database.getCollection("well");
-                Document document = new Document();
                 BasicDBObject newDocument = new BasicDBObject();
                 newDocument.append("$set", new BasicDBObject().append("fieldchecked", "yes"));
-                FindIterable<Document> mydatabaserecords = database.getCollection("well").find();
-                MongoCursor<Document> iterator = mydatabaserecords.iterator();
-
                 for(int i=0;i<selectedNames.length;i++){
                         BasicDBObject searchQuery = new BasicDBObject().append("field", selectedNames[i]);
                         collection.updateMany(searchQuery, newDocument);
                 }
+                
                 response.sendRedirect("wellsincluded.jsp");
                             }
 else{
                 response.sendRedirect("wellsincluded.jsp");
 }
+
 %>

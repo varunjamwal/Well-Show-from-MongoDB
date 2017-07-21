@@ -16,22 +16,28 @@
 <%
 
       
-            String[] selectedNames = request.getParameterValues("field");
-            MongoClient client = new MongoClient("localhost", 27017);
-            MongoDatabase database = client.getDatabase("rig_witsml");
-            if(request.getParameter("field")!=null){
-		MongoCollection collection = database.getCollection("well");
+            String[] selectedNames = request.getParameterValues("holes");
+
+            if(request.getParameter("holes")!=null){%>
+            
+            <%
+            
+                MongoClient client = new MongoClient("localhost", 27017);
+		MongoDatabase database = client.getDatabase("rig_witsml");
+		MongoCollection collection = database.getCollection("data");
+                Document document = new Document();
                 BasicDBObject newDocument = new BasicDBObject();
-                newDocument.append("$set", new BasicDBObject().append("fieldchecked", "yes"));
+                newDocument.append("$set", new BasicDBObject().append("holeSelected", "yes"));
+
+
                 for(int i=0;i<selectedNames.length;i++){
-                        BasicDBObject searchQuery = new BasicDBObject().append("field", selectedNames[i]);
+                        BasicDBObject searchQuery = new BasicDBObject().append("keyData", selectedNames[i]);
                         collection.updateMany(searchQuery, newDocument);
                 }
-                
-                response.sendRedirect("wellsincluded.jsp");
+                response.sendRedirect("Intermediate.jsp");
                             }
 else{
-                response.sendRedirect("wellsincluded.jsp");
+                response.sendRedirect("Intermediate.jsp");
 }
 
 %>
