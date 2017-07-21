@@ -30,13 +30,12 @@
 
 	<style>
             *{margin:0px}
-                    
-                    /* Chevron buttons */
+	
 			body{text-align:center}
 			.btn 
-			{ 
-                            margin-top: 25px; margin-left:30px;
-                        }
+				{ 
+					margin-top: 25px; margin-left:30px
+				}
 			.btn-arrow-right 
 			{
 				position: relative;
@@ -52,7 +51,7 @@
 				position: absolute;
 				top: 5px; 
 				width: 22px; 
-				height:     22px; 
+				height: 22px; 
 				background: inherit; 
 				border: inherit; 
 				border-left-color: transparent; 
@@ -104,7 +103,7 @@
   top: 0px;
   width: 233px;
   height: 100%;
-  color: #e1fff5;
+  color: #e1ffff;
 }
 
 
@@ -123,7 +122,6 @@
   background-color: #aed6f1;
   padding-left:15px;
 }
-
 .nav-side-menu ul .sub-menu li.active,
 .nav-side-menu li .sub-menu li.active 
 {
@@ -209,8 +207,7 @@ body
 }
 
 #promotebtn{width:70px; height:32px; border-radius:3px; background-color:#1c79af; color:white; border-left-color:#2474a6; border-top-color:#2474a6; border-right-color:black; border-bottom-color:black}
-#navHeading{padding-left:10px; padding-bottom:4px; font-family:verdana; font-size:23px}
-#navHeading a{text-decoration:none}
+
 
 	</style>
 
@@ -341,7 +338,7 @@ body
                     <INPUT id="promotebtn" TYPE=submit name=submit Value="Promote">	
                     <button type="button" class="btn-sm btn-primary">Demote</button>
                     <button type="button" class="btn-sm btn-primary glyphicon glyphicon-refresh" onClick="window.location.reload();"></button>   
-                    <button type="button" class="btn-sm btn-primary" onclick="window.location = 'v1.jsp';">View All</button>					
+                    <button type="button" class="btn-sm btn-primary" onclick="displayall()">View All</button>					
 					
                  </div>       
 	</div>
@@ -353,32 +350,27 @@ body
         	<div class="nav-side-menu">
             
             	<div class="menu-list">
-                	
-                            
-                                <p id="navHeading"><a href="#"> Dashboard</a></p>
-                            
-                                <ul id="menu-content" class="menu-content collapse in">
-                                    
-                                    <li  data-toggle="collapse" data-target="#products" class="collapsed active">
-                                        <a href="#"> Pattern</a>
-                                    </li>
-                                    
-                                    <ul class="sub-menu collapse" id="products">
-                                        <li><a href="#">Field</a></li>
-                                        <li><a href="#">Wells</a></li>
-                                        <li><a href="#">Hole Size</a></li>
-                                    </ul>
-
-                                <!--<li data-toggle="collapse" data-target="#service" class="collapsed">
-                                    <a href="#"><i class="glyphicon glyphicon-chevron-right"></i>Button</a>
-                                </li>  
-
-                            <ul class="sub-menu collapse" id="service">
-                              <li><a href="#"></a></li>
-                              <li><a href="#"></a></li>
+                	<ul id="menu-content" class="menu-content collapse in">
+                    	<li  data-toggle="collapse" data-target="#products" class="collapsed active">
+                  			<a href="#"><i class="glyphicon glyphicon-chevron-right"></i> Dashboard</a>
+                		</li>
+                        	<ul class="sub-menu collapse" id="products">
+                                    <li><a href="#"></a></li>
+                                    <li><a href="#"></a></li>
+				    <li><a href="#"></a></li>
+				    <li><a href="#"></a></li>
                             </ul>
-                                -->
-                        </ul>
+                            
+                            <!--<li data-toggle="collapse" data-target="#service" class="collapsed">
+                  		<a href="#"><i class="glyphicon glyphicon-chevron-right"></i>Button</a>
+                            </li>  
+							
+			<ul class="sub-menu collapse" id="service">
+			  <li><a href="#"></a></li>
+			  <li><a href="#"></a></li>
+			</ul>
+                            -->
+                    </ul>
                 </div>
             </div>
         </div>
@@ -414,7 +406,7 @@ body
             String statusWell = docs.getString("statusWell");
             String purposeWell = docs.getString("purposeWell");
              Integer flag = docs.getInteger("flag");
-            if(flag == 0){
+           
         %>
             <tr class = "default">
                 
@@ -428,8 +420,8 @@ body
                 <td class="col-sm-1"><% out.println(region);%></td>
                 <td class="col-sm-1"><% out.println(statusWell);%></td>
                 <td class="col-sm-3"><% out.println(purposeWell);%></td>
-            </tr> <%
-}
+            </tr>  <%
+
     }
 %>
          

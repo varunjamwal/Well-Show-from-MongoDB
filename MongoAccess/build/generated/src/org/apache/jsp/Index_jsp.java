@@ -3,22 +3,8 @@ package org.apache.jsp;
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.jsp.*;
-import com.mongodb.client.FindIterable;
-import com.mongodb.MongoClient;
-import com.mongodb.MongoClientURI;
-import com.mongodb.ServerAddress;
-import com.mongodb.client.MongoDatabase;
-import com.mongodb.client.MongoCollection;
-import org.bson.Document;
-import com.mongodb.client.MongoCursor;
-import static com.mongodb.client.model.Filters.*;
-import com.mongodb.client.result.DeleteResult;
-import static com.mongodb.client.model.Updates.*;
-import com.mongodb.client.result.UpdateResult;
-import java.util.ArrayList;
-import java.util.List;
 
-public final class mongodb_jsp extends org.apache.jasper.runtime.HttpJspBase
+public final class Index_jsp extends org.apache.jasper.runtime.HttpJspBase
     implements org.apache.jasper.runtime.JspSourceDependent {
 
   private static final JspFactory _jspxFactory = JspFactory.getDefaultFactory();
@@ -55,21 +41,6 @@ public final class mongodb_jsp extends org.apache.jasper.runtime.HttpJspBase
       _jspx_out = out;
       _jspx_resourceInjector = (org.glassfish.jsp.api.ResourceInjector) application.getAttribute("com.sun.appserv.jsp.resource.injector");
 
-      out.write("\n");
-      out.write("\n");
-      out.write("\n");
-      out.write("\n");
-      out.write("\n");
-      out.write("\n");
-      out.write("\n");
-      out.write("\n");
-      out.write("\n");
-      out.write("\n");
-      out.write("\n");
-      out.write("\n");
-      out.write("\n");
-      out.write("\n");
-      out.write("\n");
       out.write("<head>\n");
       out.write("     <meta http-equiv=\"Content-Type\" content=\"text/html; charset=windows-1256\"> \n");
       out.write("     <title> Test Page</title>\n");
@@ -110,17 +81,14 @@ public final class mongodb_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("\t\n");
       out.write("\tfunction myFunc()\n");
       out.write("\t{\n");
-      out.write("\t\tdocument.getElementById(\"click\").style.color=\"red\"\n");
+      out.write("\t\tdocument.getElementById(\"click\").style.color=\"red\";\n");
       out.write("\t}\n");
       out.write("\t\n");
       out.write("\tfunction myFunc2()\n");
       out.write("\t{\n");
-      out.write("\t\tdocument.getElementById(\"01\").style.color=\"red\"\n");
+      out.write("\t\tdocument.getElementById(\"01\").style.color=\"red\";\n");
+      out.write("                window.location = \"mongodb.jsp\";\n");
       out.write("\t}\n");
-      out.write("        function myFunc3()\n");
-      out.write("\t{\n");
-      out.write("        window.location = \"Index.jsp\";\n");
-      out.write("        }\n");
       out.write("  </script>\n");
       out.write("\n");
       out.write("<style>\n");
@@ -184,8 +152,8 @@ public final class mongodb_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("    \t<h2></h2>\n");
       out.write("        <div class=\"btn-group btn-breadcrumb\">\n");
       out.write("            \n");
-      out.write("            <a href=\"#\" class=\"btn btn-default\" id=\"click\" style=\"color:red\">File Available</a>\n");
-      out.write("            <a href=\"#\" class=\"btn btn-default\" id=\"01\" style=\"color:red\">MA</a>\n");
+      out.write("            <a href=\"#\" class=\"btn btn-default\" id=\"click\">File Available</a>\n");
+      out.write("            <a href=\"#\" class=\"btn btn-default\" id=\"01\">MA</a>\n");
       out.write("            <a href=\"#\" class=\"btn btn-default\">UN</a> \n");
       out.write("            <a href=\"#\" class=\"btn btn-default\">Data Aggregation</a>\n");
       out.write("           \n");
@@ -227,82 +195,24 @@ public final class mongodb_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("\t\t\t\t\t\n");
       out.write("\t\t\t\t\t<ul class=\"dropdown-menu\" role=\"menu\">\n");
       out.write("\t\t\t\t\t\t<li><a href=\"#\" onClick=\"myFunc2()\">Promote</a></li>\n");
-      out.write("\t\t\t\t\t\t<li><a href=\"#\" onClick=\"myFunc3()\">Demote</a></li>\n");
+      out.write("\t\t\t\t\t\t<li><a href=\"#\">Demote</a></li>\n");
       out.write("\t\t\t\t\t</ul>\n");
       out.write("\t\t\t\t</div>\n");
       out.write("\t\t\t</div>\n");
       out.write("\t\t\t\n");
       out.write("\t\t\t<div class=\"col-sm-1\">\n");
-      out.write("\t\t\t\t<div class=\"btn-group\">\n");
+      out.write("\t\t\t<div class=\"btn-group\">\n");
       out.write("\t\t\t\t\t<button type=\"button\" class=\"btn btn-primary\" onClick=\"refreshPage()\"><span class=\"glyphicon glyphicon-refresh\" style=\"height:20px\"> Refresh</span></button>\n");
       out.write("\t\t\t\t</div>\n");
       out.write("\t\t\t</div>\n");
       out.write("\t</div>\n");
-      out.write("\t\n");
-      out.write("\t</div> \n");
-      out.write("\n");
-      out.write("\n");
-      out.write("         <div class=\"col-sm-4\"></div>\n");
-      out.write("\t<div class=\"col-sm-4\">\n");
-      out.write("\t\t<p id=\"demo\"></p>\n");
-      out.write("\t      \n");
-      out.write("\t");
-
-             try {
-            MongoClient mongoClient = new MongoClient();
-             MongoDatabase database = mongoClient.getDatabase("rig_witsml");
-            FindIterable<Document> mydatabaserecords = database.getCollection("well").find();
-        MongoCursor<Document> iterator = mydatabaserecords.iterator();
-        
-      out.write("\n");
-      out.write("                 <table class=\"table table-bordered\">\n");
-      out.write("\n");
-      out.write("            <tr>\n");
-      out.write("                <th>Well Name</th>\n");
-      out.write("                <th>Country</th>\n");
-      out.write("                <th>State</th>\n");
-      out.write("                <th>Operator</th>\n");
-      out.write("            </tr>\n");
-      out.write("\n");
-      out.write("        ");
-
-        while (iterator.hasNext()) {
-            Document doc = iterator.next();
-            String country = doc.getString("country");
-            String state = doc.getString("state");
-            String Operator = doc.getString("operator");
-            String name = doc.getString("nameWell");
-      out.write("\n");
-      out.write("\n");
-      out.write("            <tr class = \"info\">\n");
-      out.write("                <td>");
- out.println(name);
-      out.write("</td>\n");
-      out.write("                <td>");
- out.println(country);
-      out.write("</td>\n");
-      out.write("                <td>");
- out.println(state);
-      out.write("</td>\n");
-      out.write("                <td>");
- out.println(Operator);
-      out.write("</tr> \n");
-      out.write("          ");
- }
-      out.write("\n");
-      out.write("        </table>\n");
-      out.write("        </div> \n");
-      out.write("        <div class=\"col-sm-4\"></div>\n");
-      out.write("             ");
-
-} catch (Exception e1) {
-    // TODO Auto-generated catch block
-    e1.printStackTrace();
-}
-
-      out.write("\n");
-      out.write("</div>\n");
-      out.write("     </body>\n");
+      out.write("</div> \n");
+      out.write("                 <div class=\"col-sm-4\">\n");
+      out.write("\t\t<div class=\"btn-group\">\n");
+      out.write("\t\t\t<button type=\"button\" class=\"btn btn-primary\" onClick=\"setTimeout(myFunc,0);\">start process</button>\n");
+      out.write("\t\t</div>\n");
+      out.write("\t</div>\n");
+      out.write("         </body>\n");
       out.write("     </html>\n");
     } catch (Throwable t) {
       if (!(t instanceof SkipPageException)){
