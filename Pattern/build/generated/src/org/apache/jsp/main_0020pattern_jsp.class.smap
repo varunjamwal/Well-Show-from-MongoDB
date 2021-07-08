@@ -1,0 +1,17 @@
+SMAP
+main_0020pattern_jsp.java
+JSP
+*S JSP
+*F
++ 0 main pattern.jsp
+main pattern.jsp
+*L
+1,90:61
+93,6:154
+98,15:160
+113,2:176
+114:178
+115:179,5
+116:184,3
+117,113:187
+*E
